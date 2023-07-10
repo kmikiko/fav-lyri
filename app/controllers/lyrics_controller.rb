@@ -17,9 +17,16 @@ class LyricsController < ApplicationController
   end
 
   def edit
+    @lyric = Lyric.find(params[:id])
   end
 
   def update
+    @lyric = Lyric.find(params[:id])
+    if @lyric.update(lyric_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
   
   def show

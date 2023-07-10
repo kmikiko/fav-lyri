@@ -1,4 +1,15 @@
 <%= form_with(model: @lyric, local: true) do |f| %>
+  <% if @lyric.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @lyric.errors.count %>件のエラーがあります。</h2>
+      <ul>
+        <% @lyric.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="lyric_phrase">
     <%= f.label :phrase %>
     <%= f.text_field :phrase %>

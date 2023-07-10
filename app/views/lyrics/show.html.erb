@@ -1,4 +1,5 @@
 <p>歌詞: <%= @lyric.phrase %></p>
 <p>詳細: <%= @lyric.detail %></p>
 
+<%= link_to "編集する", edit_lyric_path(@lyric.id) %>
 <%= link_to "投稿一覧にもどる", root_path %>
