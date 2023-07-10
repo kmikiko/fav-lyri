@@ -23,6 +23,7 @@ class LyricsController < ApplicationController
   end
   
   def show
+    @lyric = Lyric.find(params[:id])
   end
 
   def destroy

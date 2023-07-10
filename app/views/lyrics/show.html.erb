@@ -1,2 +1,4 @@
-<h1>Lyrics#show</h1>
-<p>Find me in app/views/lyrics/show.html.erb</p>
+<p>歌詞: <%= @lyric.phrase %></p>
+<p>詳細: <%= @lyric.detail %></p>
+
+<%= link_to "投稿一覧にもどる", root_path %>
