@@ -1,5 +1,7 @@
 <p>歌詞: <%= @lyric.phrase %></p>
 <p>詳細: <%= @lyric.detail %></p>
+<p>曲名: <%= @lyric.song.title %></p>
+<p>アーティスト名: <%= @lyric.artist.name %></p>
 
 <%= link_to "編集する", edit_lyric_path(@lyric.id) %>
 <%= link_to '削除する', lyric_path(@lyric.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %>
