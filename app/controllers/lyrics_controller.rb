@@ -6,6 +6,8 @@ class LyricsController < ApplicationController
 
   def new
     @lyric = Lyric.new
+    @lyric.build_song
+    @lyric.build_artist
   end
 
   def create
@@ -39,7 +41,7 @@ class LyricsController < ApplicationController
   private
 
   def lyric_params
-    params.require(:lyric).permit(:phrase, :detail)
+    params.require(:lyric).permit(:phrase, :detail, song_attributes: [:title], artist_attributes: [:name])
   end
 
   def set_lyric

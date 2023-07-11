@@ -18,6 +18,18 @@
     <%= f.label :detail %>
     <%= f.text_field :detail %>
   </div>
+  <div class="song_title">
+  <%= f.fields_for :song do |s| %>
+    <%= s.label :title, "曲名" %>
+    <%= s.text_field :title %>
+  <% end %>
+  </div>
+  <div class="artist_name">
+    <%= f.fields_for :artist do |a| %>
+      <%= a.label :name, "アーティスト名" %>
+      <%= a.text_field :name %>
+    <% end %>
+  </div>
   <%= f.submit %>
 <% end %>
 

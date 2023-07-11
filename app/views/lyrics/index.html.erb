@@ -2,12 +2,16 @@
   <tr>
     <th>歌詞</th>
     <th>詳細</th>
+    <th>曲名</th>
+    <th>アーティスト名</th>
   </tr>
 
 <% @lyrics.each do |lyric| %>
   <tr>
     <td><%= lyric.phrase %></td>
     <td><%= lyric.detail %></td>
+    <td><%= lyric.song.title %></td>
+    <td><%= lyric.artist.name %></td>
     <td><%= link_to '詳細', lyric_path(lyric.id) %></td>
   </tr>
 <% end %>
