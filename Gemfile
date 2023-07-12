@@ -20,6 +20,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rexml'
 gem 'dotenv-rails'
 gem 'devise'
+gem 'devise-i18n'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
