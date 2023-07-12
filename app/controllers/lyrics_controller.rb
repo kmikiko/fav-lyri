@@ -1,4 +1,5 @@
 class LyricsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
   before_action :set_lyric, only: [:show, :edit, :update, :destroy]
   def index
     @lyrics = Lyric.all
