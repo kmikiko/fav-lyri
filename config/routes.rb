@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'users/show'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
   root 'lyrics#index'
   resources :lyrics, only: [:new, :create, :edit, :update, :destroy, :show]
   resources :users, only: [:show]

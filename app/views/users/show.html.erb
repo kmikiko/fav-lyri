@@ -3,3 +3,5 @@
 <p><%= @user.user_profile.name %></p>
 <p><%= @user.user_profile.introduction %></p>
 <%# <%= image_tag @user.user_profile.icon.url %> 
+
+<%= link_to "編集", edit_user_registration_path(current_user.id) %>

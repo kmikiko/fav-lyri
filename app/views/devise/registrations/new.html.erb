@@ -24,10 +24,10 @@
   <div>
     <%= f.fields_for :user_profile, resource.build_user_profile || UserProfile.new do |info| %>
       <%= info.label :name %><br />
-      <%= info.text_field :name%><br />
+      <%= info.text_field :name, autocomplete: "username" %><br />
       
       <%= info.label :introduction %><br />
-      <%= info.text_field :introduction%>
+      <%= info.text_field :introduction %>
 
       <%# <%= info.label :icon %>
       <%# <%= info.file_field :icon %> 
