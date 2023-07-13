@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_one :user_profile, dependent: :destroy, inverse_of: :user
   accepts_nested_attributes_for :user_profile
   has_many :lyrics
+  mount_uploader :icon, ImageUploader
 end
