@@ -30,17 +30,18 @@
     <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
-
+<%# , resource.build_user_profile || UserProfile.new %>
   <div>
-    <%= f.fields_for :user_profile, resource.build_user_profile || UserProfile.new do |info| %>
+    <%= f.fields_for :user_profile do |info| %>
       <%= info.label :name %><br />
       <%= info.text_field :name, autocomplete: "username" %><br />
       
       <%= info.label :introduction %><br />
-      <%= info.text_field :introduction%><br />
+      <%= info.text_field :introduction %><br />
 
-      <%= info.label :icon %>
-      <%= info.file_field :icon %>
+      <%= info.label :icon %><br />
+      <%= info.file_field :icon, accept: "image/*" %><br />
+      <%= image_tag(current_user.user_profile.icon.url) %>
       <%= info.hidden_field :image_cache %>
     <% end %>
   </div>

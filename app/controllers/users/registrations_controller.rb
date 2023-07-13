@@ -5,28 +5,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    super
-    resource.build_user_profile if resource.user_profile.nil?
-  end
+  # def new
+  #   super
+  #   resource.build_user_profile if resource.user_profile.nil?
+  # end
 
-  # POST /resource
-  def create
-    super
+  # # POST /resource
+  # def create
+  #   super
 
-    resource.build_user_profile
-    resource.save
-  end
+  #   resource.build_user_profile
+  #   resource.save
+  # end
 
-  # GET /resource/edit
-  def edit
-    super
-  end
+  # # GET /resource/edit
+  # def edit
+  #   super
+  # end
 
-  # PUT /resource
-  def update
-    super
-  end
+  # # PUT /resource
+  # def update
+  #   super
+  # end
 
   # DELETE /resource
   # def destroy

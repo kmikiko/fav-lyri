@@ -1,7 +1,11 @@
-<h1>User Page</h1>
+<p>User Page</p>
+<% if @user.user_profile.icon && @user.user_profile.icon.url %>
+  <%= image_tag(@user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
+<% else %>
+  <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+<% end %>
 <p>メールアドレス : <%= @user.email %></p>
 <p><%= @user.user_profile.name %></p>
 <p><%= @user.user_profile.introduction %></p>
-<%# <%= image_tag @user.user_profile.icon.url %> 
+<%= link_to "編集", edit_user_registration_path %>
 
-<%= link_to "編集", edit_user_registration_path(current_user.id) %>

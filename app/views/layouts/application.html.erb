@@ -13,7 +13,13 @@
   <body>
     <header>
       <% if user_signed_in? %>
-        <%= link_to "My Page", user_path(current_user.id) %>
+        <%= link_to user_path(current_user.id) do %>
+          <% if current_user.user_profile.icon && current_user.user_profile.icon.url %>
+            <object><%= image_tag(current_user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %></object>
+          <% else %>
+            <object><%= image_tag("default.png", class: "rounded-circle", size: "25x25") %></object> 
+          <% end %>
+        <% end %>
         <%= link_to "投稿一覧", root_path %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       <% else %>
