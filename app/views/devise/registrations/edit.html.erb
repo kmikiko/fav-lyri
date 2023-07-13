@@ -31,6 +31,20 @@
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
+  <div>
+    <%= f.fields_for :user_profile, resource.build_user_profile || UserProfile.new do |info| %>
+      <%= info.label :name %>
+      <%= info.text_field :name%>
+      
+      <%= info.label :introduction %>
+      <%= info.text_field :introduction%>
+
+      <%# <%= info.label :icon %>
+      <%# <%= info.file_field :icon %> 
+      <%# <%= info.hidden_field :image_cache %> 
+    <% end %>
+  </div>
+
   <div class="actions">
     <%= f.submit t('.update') %>
   </div>
