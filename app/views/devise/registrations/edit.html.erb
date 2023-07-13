@@ -30,7 +30,7 @@
     <%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
-<%# , resource.build_user_profile || UserProfile.new %>
+  
   <div>
     <%= f.fields_for :user_profile do |info| %>
       <%= info.label :name %><br />
