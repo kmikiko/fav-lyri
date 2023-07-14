@@ -6,6 +6,8 @@ class Lyric < ApplicationRecord
   accepts_nested_attributes_for :artist, allow_destroy: true
   accepts_nested_attributes_for :song, allow_destroy: true
   belongs_to :user
+  has_many :lyrics_feelings, dependent: :destroy
+  has_many :feelings, through: :lyrics_feelings, source: :feeling
 
   def self.ransackable_attributes(auth_object = nil)
     %w[phrase]
