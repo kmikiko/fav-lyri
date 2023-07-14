@@ -55,7 +55,7 @@ class LyricsController < ApplicationController
   private
 
   def lyric_params
-    params.require(:lyric).permit(:phrase, :detail, song_attributes: [:title], artist_attributes: [:name])
+    params.require(:lyric).permit(:phrase, :detail, song_attributes: [:title], artist_attributes: [:name], feeling_ids: [] )
   end
 
   def set_lyric
