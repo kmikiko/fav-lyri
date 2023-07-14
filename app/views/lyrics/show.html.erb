@@ -3,6 +3,15 @@
 <p>曲名: <%= @lyric.song.title %></p>
 <p>アーティスト名: <%= @lyric.artist.name %></p>
 
+<% track = @tracks.find { |t| t[:lyric] == @lyric } %>
+<% if track && track[:url] %>
+  <p><audio src="<%= track[:url] %>" controls></audio></p>
+  <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
+<% else %>
+  <p>No preview available</p>
+  <p></p>
+<% end %>
+
 <%= link_to "編集する", edit_lyric_path(@lyric.id) %>
 <%= link_to '削除する', lyric_path(@lyric.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %>
 <%= link_to "投稿一覧にもどる", root_path %>
