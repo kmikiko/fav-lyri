@@ -2,8 +2,8 @@ class LyricsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_lyric, only: [:show, :edit, :update, :destroy]
   def index
-    @q = Lyric.ransack(params[:q])
-    @lyrics = @q.result
+    @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
+    @lyrics = @q.result.includes(:artist, :song)
   end
 
   def new
