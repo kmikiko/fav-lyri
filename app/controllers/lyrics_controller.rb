@@ -1,7 +1,7 @@
 class LyricsController < ApplicationController
   require 'rspotify'
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_ID'])
-  
+
   before_action :authenticate_user!, only: [:new, :create]
   before_action :set_lyric, only: [:show, :edit, :update, :destroy]
   def index
@@ -37,6 +37,14 @@ class LyricsController < ApplicationController
   end
   
   def show
+    @tracks = []
+    song = @lyric.song.title
+    artist = @lyric.artist.name
+      tracks = RSpotify::Track.search("#{song} #{artist}")
+      tracks.each do |track|
+        url = track.preview_url
+        @tracks << { lyric: @lyric, url: url, track: track }
+      end
   end
 
   def destroy
