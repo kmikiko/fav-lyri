@@ -2,6 +2,11 @@
 <p>詳細: <%= @lyric.detail %></p>
 <p>曲名: <%= @lyric.song.title %></p>
 <p>アーティスト名: <%= @lyric.artist.name %></p>
+<p>
+  <% @lyric.feelings.each do |feeling| %>
+    <%= feeling.sort %>
+  <% end %>
+</p>
 
 <% track = @tracks.find { |t| t[:lyric] == @lyric } %>
 <% if track && track[:url] %>
