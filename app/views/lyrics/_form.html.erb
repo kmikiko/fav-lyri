@@ -30,11 +30,12 @@
       <%= a.text_field :name %>
     <% end %>
   </div>
-
-  <% Feeling.all.each do |feeling| %>
-    <%= f.check_box :feeling_ids, { multiple: true, checked: @lyric.feeling_ids.include?(label.id), disabled: feeling[:disabled], include_hidden: false }, feeling[:id] %>
-    <%= f.label :feeling_ids, label.name, value: feeling[:id] %></td>
-  <% end %>
+  <div class="feeling_type">
+    <% Feeling.all.each do |feeling| %>
+      <%= f.check_box :feeling_ids, { multiple: true, checked: @lyric.feeling_ids.include?(feeling.id), disabled: feeling[:disabled], include_hidden: false }, feeling[:id] %>
+      <%= f.label :feeling_ids, feeling.type, value: feeling[:id] %></td>
+    <% end %>
+  </div>
 
   <%= f.submit %>
 <% end %>
