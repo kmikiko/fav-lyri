@@ -10,9 +10,10 @@ class LyricsController < ApplicationController
     @lyric.build_song
     @lyric.build_artist
   end
-
+  
   def create
     @lyric = Lyric.new(lyric_params)
+    @lyric.user_id = current_user.id
     if @lyric.save
       redirect_to root_path
     else
