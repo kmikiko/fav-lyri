@@ -11,6 +11,7 @@
     <th>詳細</th>
     <th>曲名</th>
     <th>アーティスト名</th>
+    <th>聴きたい気分</th>
   </tr>
 
 <% @lyrics.each do |lyric| %>
@@ -19,6 +20,11 @@
     <td><%= lyric.detail %></td>
     <td><%= lyric.song.title %></td>
     <td><%= lyric.artist.name %></td>
+    <td>
+      <% lyric.feelings.each do |feeling| %>
+        <%= feeling.sort %>
+      <% end %>
+    </td>
     <td><%= link_to '詳細', lyric_path(lyric.id) %></td>
   </tr>
 <% end %>
