@@ -7,7 +7,7 @@ class LyricsController < ApplicationController
   def index
     @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
     @feelings = Feeling.all
-    @lyrics = @q.result.includes(:artist, :song, :feelings)
+    @lyrics = @q.result.includes(:artist, :song, :feelings, :lyrics_feelings)
   end
 
   def new

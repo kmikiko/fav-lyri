@@ -10,10 +10,10 @@ class Lyric < ApplicationRecord
   has_many :feelings, through: :lyrics_feelings, source: :feeling
 
   def self.ransackable_attributes(auth_object = nil)
-    %w[phrase]
+    %w[id phrase]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    %w[artist song feelings]
+    %w[artist song feelings lyrics_feelings]
   end
 end
