@@ -30,7 +30,7 @@
       <%= a.text_field :name %>
     <% end %>
   </div>
-  <div class="feeling_type">
+  <div class="feeling_sort">
     <% Feeling.all.each do |feeling| %>
       <%= f.check_box :feeling_ids, { multiple: true, checked: @lyric.feeling_ids.include?(feeling.id), disabled: feeling[:disabled], include_hidden: false }, feeling[:id] %>
       <%= f.label :feeling_ids, feeling.sort, value: feeling[:id] %>
