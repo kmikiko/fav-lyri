@@ -6,7 +6,8 @@ class LyricsController < ApplicationController
   before_action :set_lyric, only: [:show, :edit, :update, :destroy]
   def index
     @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
-    @lyrics = @q.result.includes(:artist, :song)
+    @feelings = Feeling.all
+    @lyrics = @q.result.includes(:artist, :song, :feelings)
   end
 
   def new

@@ -14,6 +14,6 @@ class Lyric < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    %w[artist song]
+    %w[artist song feelings]
   end
 end

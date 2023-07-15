@@ -2,6 +2,7 @@
   <%= f.search_field :phrase_cont, placeholder: '歌詞' %>
   <%= f.search_field :song_title_cont, placeholder: '曲名' %>
   <%= f.search_field :artist_name_cont, placeholder: 'アーティスト名' %>
+  <%= f.select :feelings_sort, options_from_collection_for_select(@feelings, :id, :sort) %>
   <%= f.submit '検索' %>
 <% end %>
 
