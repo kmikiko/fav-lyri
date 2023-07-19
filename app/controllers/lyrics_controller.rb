@@ -39,6 +39,7 @@ class LyricsController < ApplicationController
   end
   
   def show
+    @favorite = current_user.favorites.find_by(lyric_id: @lyric.id)
     @tracks = []
     song = @lyric.song.title
     artist = @lyric.artist.name
