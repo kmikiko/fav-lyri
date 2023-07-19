@@ -8,6 +8,8 @@ class Lyric < ApplicationRecord
   belongs_to :user
   has_many :lyrics_feelings, dependent: :destroy
   has_many :feelings, through: :lyrics_feelings, source: :feeling
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_users, through: :favorites, source: :user
 
   def self.ransackable_attributes(auth_object = nil)
     %w[id phrase]

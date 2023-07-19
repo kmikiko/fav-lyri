@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   root 'lyrics#index'
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show]
   resources :users, only: [:show]
+  resources :favorites, only: [:create, :destroy]
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
