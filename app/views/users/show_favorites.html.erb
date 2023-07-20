@@ -14,10 +14,12 @@
     <% @favorites.each do |favorite| %>
       <tr>
         <td>
-          <% if favorite.lyric.user.user_profile.icon && favorite.lyric.user.user_profile.icon.url %>
-            <%= image_tag(favorite.lyric.user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
-          <% else %>
-            <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+          <%= link_to lyric_path(favorite.lyric.id) do %>
+            <% if favorite.lyric.user.user_profile.icon && favorite.lyric.user.user_profile.icon.url %>
+              <%= image_tag(favorite.lyric.user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
+            <% else %>
+              <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+            <% end %>
           <% end %>
         </td>
         <td><%= favorite.lyric.user.user_profile.name %></td>
