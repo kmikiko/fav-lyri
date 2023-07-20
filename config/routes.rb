@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     end
   end
   resources :favorites, only: [:create, :destroy]
-  # post '/favorites', to: 'favorites#create'
+
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
