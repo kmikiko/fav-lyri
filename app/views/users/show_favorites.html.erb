@@ -1,0 +1,38 @@
+<h1>お気に入り一覧</h1>
+
+<% if @favorites.any? %>
+  <table>
+    <tr>
+      <th></th>
+      <th>ユーザー名</th>
+      <th>歌詞</th>
+      <th>詳細</th>
+      <th>曲名</th>
+      <th>アーティスト名</th>
+      <th>聴きたい気分</th>
+    </tr>
+    <% @favorites.each do |favorite| %>
+      <tr>
+        <td>
+          <% if favorite.lyric.user.user_profile.icon && favorite.lyric.user.user_profile.icon.url %>
+            <%= image_tag(favorite.lyric.user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
+          <% else %>
+            <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+          <% end %>
+        </td>
+        <td><%= favorite.lyric.user.user_profile.name %></td>
+        <td><%= favorite.lyric.phrase %></td>
+        <td><%= favorite.lyric.detail %></td>
+        <td><%= favorite.lyric.song.title %></td>
+        <td><%= favorite.lyric.artist.name %></td>
+        <td>
+          <% favorite.lyric.feelings.each do |feeling| %>
+            <%= feeling.sort %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>お気に入りした投稿はありません。</p>
+<% end %>
