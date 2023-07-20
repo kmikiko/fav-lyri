@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   }
   root 'lyrics#index'
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show]
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    member do
+      get :favorites, to: 'users#show_favorites', as: 'user_favorites'
+    end
+  end
   resources :favorites, only: [:create, :destroy]
+  # post '/favorites', to: 'favorites#create'
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
