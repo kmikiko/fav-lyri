@@ -27,7 +27,7 @@
 
 <%= link_to "編集", edit_lyric_path(@lyric.id) %>
 <%= link_to '削除', lyric_path(@lyric.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %>
-
+<hr>
 <%= render partial: 'comments/form', locals: { comment: @comment, lyric: @lyric } %>
 <div id="comments_area">
   <%= render partial: 'comments/index', locals: { comments: @comments, lyric: @lyric } %>
