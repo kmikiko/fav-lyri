@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do
     member do
       post :favorites, to: 'users#show_favorites', as: 'user_favorites'
+      post :show_followers
+      post :show_following
     end
   end
 

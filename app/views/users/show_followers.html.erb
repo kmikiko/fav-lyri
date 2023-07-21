@@ -1,0 +1,20 @@
+<h1>Followers of <%= @user.user_profile.name %></h1>
+
+<% if @followers.any? %>
+  <ul>
+    <% @followers.each do |follower| %>
+      <p>
+        <%= link_to user_path(follower.id) do %>
+          <% if follower.user_profile.icon && follower.user_profile.icon.url %>
+            <%= image_tag(follower.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
+          <% else %>
+            <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+          <% end %>
+        <% end %>
+        <%= follower.user_profile.name %></li>
+      </p>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No followers found.</p>
+<% end %>

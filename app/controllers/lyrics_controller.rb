@@ -39,17 +39,19 @@ class LyricsController < ApplicationController
   end
   
   def show
-    @favorite = current_user.favorites.find_by(lyric_id: @lyric.id)
+    if user_signed_in?
+      @favorite = current_user.favorites.find_by(lyric_id: @lyric.id)
+    end
     @comments = @lyric.comments
     @comment = @lyric.comments.build
     @tracks = []
     song = @lyric.song.title
     artist = @lyric.artist.name
-      tracks = RSpotify::Track.search("#{song} #{artist}")
-      tracks.each do |track|
-        url = track.preview_url
-        @tracks << { lyric: @lyric, url: url, track: track }
-      end
+    tracks = RSpotify::Track.search("#{song} #{artist}")
+    tracks.each do |track|
+      url = track.preview_url
+      @tracks << { lyric: @lyric, url: url, track: track }
+    end
   end
 
   def destroy
