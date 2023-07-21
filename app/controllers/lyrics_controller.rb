@@ -40,6 +40,8 @@ class LyricsController < ApplicationController
   
   def show
     @favorite = current_user.favorites.find_by(lyric_id: @lyric.id)
+    @comments = @lyric.comments
+    @comment = @lyric.comments.build
     @tracks = []
     song = @lyric.song.title
     artist = @lyric.artist.name
