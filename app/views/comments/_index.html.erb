@@ -13,6 +13,8 @@
           <% end %>
           <%= comment.created_at.strftime('%Y年%m月%d日 %H:%M') %>
           <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true %>
+          <%= link_to "削除", lyric_comment_path(comment.lyric_id, comment.id), method: :delete, remote: true,
+                                        data: { confirm: "本当に削除しますか?"} %>
         </p>
         <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
     <% end %>
