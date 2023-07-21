@@ -4,12 +4,17 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   root 'lyrics#index'
-  resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show]
+  
+  resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
+    resources :comments
+  end
+
   resources :users, only: [:show] do
     member do
       post :favorites, to: 'users#show_favorites', as: 'user_favorites'
     end
   end
+
   resources :favorites, only: [:create, :destroy]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
