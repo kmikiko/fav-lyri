@@ -7,7 +7,7 @@
 <p><%= @user.user_profile.name %></p>
 <p><%= @user.user_profile.introduction %></p>
 
-<%= render 'follow_form', user: user %>
+<%= render 'follow_form', user: @user %>
 
 <p>メールアドレス : <%= @user.email %></p>
 <%= button_to "favorites", user_favorites_user_path %>
