@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'lyrics#index'
 
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
-    resources :comments
+    resources :comments, only: [:create, :destroy, :edit, :update]
   end
 
   resources :users, only: [:show] do

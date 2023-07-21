@@ -12,7 +12,9 @@
             <%= comment.lyric.user.user_profile.name %>
           <% end %>
           <%= comment.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+          <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true %>
         </p>
+        <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
     <% end %>
   <% end %>
 </ul>
