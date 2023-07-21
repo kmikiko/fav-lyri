@@ -4,10 +4,12 @@
 <% else %>
   <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
 <% end %>
-<p>メールアドレス : <%= @user.email %></p>
 <p><%= @user.user_profile.name %></p>
 <p><%= @user.user_profile.introduction %></p>
 
+<%= render 'follow_form', user: user %>
+
+<p>メールアドレス : <%= @user.email %></p>
 <%= button_to "favorites", user_favorites_user_path %>
 <%= link_to "編集", edit_user_registration_path %>
 
