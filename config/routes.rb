@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   root 'lyrics#index'
-  
+
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
     resources :comments
   end
