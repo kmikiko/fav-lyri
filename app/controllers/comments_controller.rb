@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @comment = @lyric.comments.build(comment_params)
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to blog_path(@lyric) }
+        format.js { render :index }
       else
         format.html { redirect_to blog_path(@lyric), notice: '投稿できませんでした' }
       end
