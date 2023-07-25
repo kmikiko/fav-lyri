@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_07_21_050929) do
+ActiveRecord::Schema.define(version: 2023_07_25_003415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,21 @@ ActiveRecord::Schema.define(version: 2023_07_21_050929) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["feeling_id"], name: "index_lyrics_feelings_on_feeling_id"
     t.index ["lyric_id"], name: "index_lyrics_feelings_on_lyric_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "lyric_id"
+    t.integer "comment_id"
+    t.string "action", default: "", null: false
+    t.boolean "checked", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["lyric_id"], name: "index_notifications_on_lyric_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "relationships", force: :cascade do |t|
