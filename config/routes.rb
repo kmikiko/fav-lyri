@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
   resources :favorites, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :notifications, only: :index
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
