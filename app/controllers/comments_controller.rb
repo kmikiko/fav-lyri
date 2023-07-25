@@ -5,6 +5,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save
+        @lyric.create_notification_comment!(current_user, @comment.id)
         format.js { render :index }
       else
         format.html { redirect_to lyric_path(@lyric), notice: '投稿できませんでした' }
