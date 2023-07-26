@@ -10,7 +10,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue-star@0.0.4/dist/VueStar.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-j+OR9t2K0/KVYIzT/RK6mTrJUvK3U7qdeD6NJD5a7mcp8QqZu96R0RNay6P4l3IA0yjOEnjVkSG1AjjIfPtKg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
 
   <body>
@@ -21,6 +21,13 @@
             <object><%= image_tag(current_user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %></object>
           <% else %>
             <object><%= image_tag("default.png", class: "rounded-circle", size: "25x25") %></object> 
+          <% end %>
+        <% end %>
+        <%= link_to notifications_path do %>
+          <% if @unchecked_notifications.any? %>
+            <%= 'new通知' %>
+          <% else %>
+            <%= '通知' %>
           <% end %>
         <% end %>
         <%= link_to "投稿一覧", root_path %>

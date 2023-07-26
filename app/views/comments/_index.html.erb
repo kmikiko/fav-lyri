@@ -3,13 +3,13 @@
     <% if comment.id.present? %>
         <p><%= comment.content %></p>
         <p>
-          <%= link_to user_path(comment.lyric.user.id) do %>
-            <% if comment.lyric.user.user_profile.icon && comment.lyric.user.user_profile.icon.url %>
-              <%= image_tag(comment.lyric.user.user_profile.icon.url, class: "rounded-circle", size: "30x30")%>
+          <%= link_to user_path(comment.user.id) do %>
+            <% if comment.user.user_profile.icon && comment.user.user_profile.icon.url %>
+              <%= image_tag(comment.user.user_profile.icon.url, class: "rounded-circle", size: "30x30")%>
             <% else %>
               <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
             <% end %>
-            <%= comment.lyric.user.user_profile.name %>
+            <%= comment.user.user_profile.name %>
           <% end %>
           <%= comment.created_at.strftime('%Y年%m月%d日 %H:%M') %>
           <% if current_user == comment.user %>

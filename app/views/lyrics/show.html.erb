@@ -1,3 +1,11 @@
+<%= link_to user_path(@lyric.user.id) do %>
+  <% if @lyric.user.user_profile.icon && @lyric.user.user_profile.icon.url %>
+    <object><%= image_tag(@lyric.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %></object>
+  <% else %>
+    <object><%= image_tag("default.png", class: "rounded-circle", size: "25x25") %></object> 
+  <% end %>
+<% end %>
+<object><%= @lyric.user.user_profile.name %></object>
 <p>歌詞: <%= @lyric.phrase %></p>
 <p>詳細: <%= @lyric.detail %></p>
 <p>曲名: <%= @lyric.song.title %></p>
