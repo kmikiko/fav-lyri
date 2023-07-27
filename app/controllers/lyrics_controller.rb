@@ -60,6 +60,10 @@ class LyricsController < ApplicationController
     redirect_to root_path
   end
 
+  def ranking
+    generate_lyric_ranking
+  end
+
   private
 
   def lyric_params

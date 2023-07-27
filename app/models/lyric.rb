@@ -12,6 +12,7 @@ class Lyric < ApplicationRecord
   has_many :favorite_users, through: :favorites, source: :user
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  is_impressionable counter_cache: true
 
   def self.ransackable_attributes(auth_object = nil)
     %w[id phrase]
