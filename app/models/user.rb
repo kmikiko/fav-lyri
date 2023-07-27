@@ -47,4 +47,13 @@ class User < ApplicationRecord
       user.build_user_profile(name: "ゲスト")
     end
   end
+
+  def self.guest_admin
+    find_or_create_by!(email: 'guest-admin@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.skip_confirmation! 
+      user.build_user_profile(name: "ゲスト")
+      user.admin = true
+    end
+  end
 end

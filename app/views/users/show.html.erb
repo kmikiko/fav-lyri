@@ -16,7 +16,7 @@
   <%= button_to "favorites", user_favorites_user_path %>
   <%= button_to "follower", show_followers_user_path %>
   <%= button_to "follow", show_following_user_path %>
-  <% if current_user.email != 'guest@example.com'%>
+  <% if current_user.email != 'guest@example.com' || "guest-admin@example.com" %>
     <%= link_to "編集", edit_user_registration_path %>
   <% end %>
 <% end %>

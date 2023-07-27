@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   end
 
   post '/users/guest_sign_in', to: 'users#guest_sign_in'
+  post '/users/guest_admin_sign_in', to: 'users#guest_admin_sign_in'
 
   resources :favorites, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
