@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get 'relationships/destroy'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    passwords: 'users/passwords'
   }
   root 'lyrics#index'
 
@@ -19,6 +20,8 @@ Rails.application.routes.draw do
       post :show_following
     end
   end
+
+  post '/users/guest_sign_in', to: 'users#guest_sign_in'
 
   resources :favorites, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
