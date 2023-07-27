@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   }
   root 'lyrics#index'
 
+  get '/lyrics/ranking', to: 'lyrics#ranking'
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
     resources :comments, only: [:create, :destroy, :edit, :update]
   end

@@ -1,0 +1,36 @@
+
+<h2>閲覧数ランキング</h2>
+<% n = 1 %>
+<% @rank_lyrics.each do |t| %>
+  <%= link_to user_path(t.user.id) do %>
+    <% if t.user.user_profile.icon && t.user.user_profile.icon.url %>
+      <object><%= image_tag(t.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %></object>
+      <object><%= t.user.user_profile.name %></object>
+    <% else %>
+      <object><%= image_tag("default.png", class: "rounded-circle", size: "25x25") %></object> 
+      <object><%= t.user.user_profile.name %></object>
+    <% end %>
+  <% end %>
+  <p><%= "第#{n}位"%></p>
+  <p><%= "歌詞：#{t.phrase}" %></p>
+  <p><%= "詳細：#{t.detail}" %></p>
+  <p><%= "アーティスト：#{t.artist.name}" %></p>
+  <p><%= "曲：#{t.song.title}" %></p>
+  <p>
+    <%= "#{t.impressions_count} Views" %>
+    <%= link_to "Comments", lyric_path(t.id) %>
+  </p>
+  <% track = @tracks.find { |t_for_track| t_for_track[:lyric] == t } %>
+    <% if track && track[:url] %>
+      <p><audio id="player" src="<%= track[:url] %>" controls></audio></p>
+      <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
+      <script>
+        document.getElementById('player').volume = 0.1;
+      </script>
+    <% else %>
+      <p>No preview available</p>
+      <p></p>
+    <% end %>
+    <hr>
+  <% n += 1 %>
+<% end %>

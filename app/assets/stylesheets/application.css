@@ -30,3 +30,12 @@ body{
 .rounded-circle {
   border-radius: 20%;
 }
+
+.search_ranking_button{
+  display: flex; 
+  align-items: center;
+}
+
+.ranking_button{
+  margin-left: 10px;
+}

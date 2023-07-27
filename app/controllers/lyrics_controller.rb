@@ -61,7 +61,17 @@ class LyricsController < ApplicationController
   end
 
   def ranking
-    generate_lyric_ranking
+    @rank_lyrics = Lyric.order(impressions_count: 'DESC').limit(5)
+    @tracks = []
+    @rank_lyrics.each do |rank_lyric|
+      song = rank_lyric.song.title
+      artist = rank_lyric.artist.name
+      tracks = RSpotify::Track.search("#{song} #{artist}")
+      tracks.each do |track|
+        url = track.preview_url
+        @tracks << { lyric: rank_lyric, url: url, track: track }
+      end
+    end
   end
 
   private

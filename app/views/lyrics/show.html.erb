@@ -40,6 +40,8 @@
   <%= link_to '削除', lyric_path(@lyric.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %>
   <hr>
   <%= render partial: 'comments/form', locals: { comment: @comment, lyric: @lyric } %>
+<% else %>
+  <%= link_to "ログインするとコメントができます！", new_user_session_path %>
 <% end %>
 
 <div id="comments_area">
