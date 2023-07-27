@@ -42,6 +42,7 @@ class LyricsController < ApplicationController
     if user_signed_in?
       @favorite = current_user.favorites.find_by(lyric_id: @lyric.id)
     end
+    impressionist(@lyric, nil, unique: [:ip_address]) 
     @comments = @lyric.comments
     @comment = @lyric.comments.build
     @tracks = []
