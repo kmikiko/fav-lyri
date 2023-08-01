@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id]) 
+    @following_lyrics = @user.following.map { |user| user.lyrics }.flatten.sort_by(&:created_at).reverse
   end
 
   def show_favorites

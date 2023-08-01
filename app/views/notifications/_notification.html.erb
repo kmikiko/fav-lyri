@@ -5,7 +5,7 @@
   <div class="form-inline">
     <span>
       <%= link_to user_path(visitor) do %>
-        <%= image_tag visitor.user_profile.icon.url, class: "icon_mini" %>
+        <%= image_tag visitor.user_profile.icon.url, class: "rounded-circle", size: "20x20" %>
         <strong><%= visitor.user_profile.name %></strong>
       <% end %>
       さんが
