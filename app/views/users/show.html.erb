@@ -13,51 +13,52 @@
 
 <% if current_user == @user %>
   <p>メールアドレス : <%= @user.email %></p>
-  <%= button_to "favorites", user_favorites_user_path %>
-  <%= button_to "follower", show_followers_user_path %>
-  <%= button_to "follow", show_following_user_path %>
+  <%= button_to "favorites", user_favorites_user_path, method: :get %>
+  <%= button_to "follower", show_followers_user_path, method: :get %>
+  <%= button_to "follow", show_following_user_path, method: :get %>
   <% if current_user.email != 'guest@example.com' && current_user.email != 'guest-admin@example.com' %>
   <%= link_to "編集", edit_user_registration_path %>
   <% end %>
-
-  <table>
-    <tr>
-      <th></th>
-      <th>ユーザー</th>
-      <th>歌詞</th>
-      <th>詳細</th>
-      <th>曲名</th>
-      <th>アーティスト名</th>
-      <th>聴きたい気分</th>
-      <th></th>
-    </tr>
-
-    <% @following_lyrics.each do |lyric| %>
+  <% if @following_lyrics.any? %>  
+    <table>
       <tr>
-        <td>
-          <%= link_to user_path(lyric.user.id) do %>
-            <% if lyric.user.user_profile.icon && lyric.user.user_profile.icon.url %>
-              <%= image_tag(lyric.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %>
-            <% else %>
-              <%= image_tag("default.png", class: "rounded-circle", size: "25x25") %>
-            <% end %>
-          <% end %>   
-        </td> 
-        <td><%= lyric.user.user_profile.name %></td>
-        <td><%= lyric.phrase %></td>
-        <td><%= lyric.detail %></td>
-        <td><%= lyric.song.title %></td>
-        <td><%= lyric.artist.name %></td>
-        <td>
-          <% lyric.feelings.each do |feeling| %>
-            <%= feeling.sort %>
-          <% end %>
-        </td>
-        <td><%= link_to '詳細', lyric_path(lyric.id) %></td>
-        <td><%= lyric.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <th></th>
+        <th>ユーザー</th>
+        <th>歌詞</th>
+        <th>詳細</th>
+        <th>曲名</th>
+        <th>アーティスト名</th>
+        <th>聴きたい気分</th>
+        <th></th>
       </tr>
-    <% end %>
-  </table>
+
+      <% @following_lyrics.each do |lyric| %>
+        <tr>
+          <td>
+            <%= link_to user_path(lyric.user.id) do %>
+              <% if lyric.user.user_profile.icon && lyric.user.user_profile.icon.url %>
+                <%= image_tag(lyric.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %>
+              <% else %>
+                <%= image_tag("default.png", class: "rounded-circle", size: "25x25") %>
+              <% end %>
+            <% end %>   
+          </td> 
+          <td><%= lyric.user.user_profile.name %></td>
+          <td><%= lyric.phrase %></td>
+          <td><%= lyric.detail %></td>
+          <td><%= lyric.song.title %></td>
+          <td><%= lyric.artist.name %></td>
+          <td>
+            <% lyric.feelings.each do |feeling| %>
+              <%= feeling.sort %>
+            <% end %>
+          </td>
+          <td><%= link_to '詳細', lyric_path(lyric.id) %></td>
+          <td><%= lyric.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
 <% end %>
 
 

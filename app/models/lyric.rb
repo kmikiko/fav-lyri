@@ -14,6 +14,9 @@ class Lyric < ApplicationRecord
   has_many :notifications, dependent: :destroy
   is_impressionable counter_cache: true
 
+  scope :recently_created, -> { where('created_at >= ?', 1.month.ago) }
+  scope :ranked, -> { order(impressions_count: :desc) }
+
   def self.ransackable_attributes(auth_object = nil)
     %w[id phrase]
   end

@@ -8,7 +8,7 @@ class LyricsController < ApplicationController
   def index
     @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
     @feelings = Feeling.all
-    @lyrics = @q.result.includes(:artist, :song, :feelings, :lyrics_feelings)
+    @lyrics = @q.result.includes(:artist, :song, :feelings, :lyrics_feelings).order(created_at: :desc)
   end
 
   def new
@@ -61,7 +61,7 @@ class LyricsController < ApplicationController
   end
 
   def ranking
-    @rank_lyrics = Lyric.order(impressions_count: 'DESC').limit(5)
+    @rank_lyrics = Lyric.recently_created.ranked.includes(:song, :artist, user: :user_profile).limit(5)
     @tracks = []
     @rank_lyrics.each do |rank_lyric|
       song = rank_lyric.song.title
