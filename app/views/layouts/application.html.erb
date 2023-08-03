@@ -15,7 +15,7 @@
 
   <body>
     <header>
-      <%= link_to image_tag("logo.png", class: "rounded-circle", size: "50x50"), root_path %>
+      <%= link_to image_tag("logo.png", class: "rounded-circle", size: "50x50"), lyrics_path %>
       <% if user_signed_in? %>
         <%= link_to user_path(current_user.id) do %>
           <% if current_user.user_profile.icon && current_user.user_profile.icon.url %>
@@ -32,11 +32,13 @@
             <object><%= image_tag("bell.png", class: "rounded-circle", size: "20x20") %></object>
           <% end %>
         <% end %>
+        <%= link_to "About Fav-lyri", root_path %>
         <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
         <% if current_user.admin == true %>
           <%= link_to "管理者画面", rails_admin_path %>
         <% end %>
       <% else %>
+        <%= link_to "About Fav-lyri", root_path %>
         <%= link_to "ログイン", new_user_session_path %>
         <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
         <%= link_to "管理者ゲストログイン", users_guest_admin_sign_in_path, method: :post %>

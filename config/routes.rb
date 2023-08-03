@@ -6,7 +6,8 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     passwords: 'users/passwords'
   }
-  root 'lyrics#index'
+  root 'homes#index'
+  resources :homes, only: :index
 
   get '/lyrics/ranking', to: 'lyrics#ranking'
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show] do

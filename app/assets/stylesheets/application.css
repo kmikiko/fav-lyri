@@ -13,21 +13,3 @@
  *= require_tree .
  *= require_self
  */
- a:link, a:visited, a:hover, a:active {
-  text-decoration: none;
-  color:gray;
-  font-size: 1rem;
-}
-
-.rounded-circle {
-  border-radius: 20%;
-}
-
-.search_ranking_button{
-  display: flex; 
-  align-items: center;
-}
-
-.ranking_button{
-  margin-left: 10px;
-}
