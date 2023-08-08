@@ -1,36 +1,45 @@
 
-<h2>月間閲覧数ランキング</h2>
-<% n = 1 %>
-<% @rank_lyrics.each do |t| %>
-  <%= link_to user_path(t.user.id) do %>
-    <% if t.user.user_profile.icon && t.user.user_profile.icon.url %>
-      <object><%= image_tag(t.user.user_profile.icon.url, class: 'rounded-circle', size: '25x25') %></object>
-      <object><%= t.user.user_profile.name %></object>
-    <% else %>
-      <object><%= image_tag('default.png', class: 'rounded-circle', size: '25x25') %></object> 
-      <object><%= t.user.user_profile.name %></object>
+<div class="container mx-auto py-8">
+  <h2 class="text-2xl font-semibold mb-4">月間閲覧数ランキング</h2>
+  <div class="grid grid-cols-1 justify-center gap-4">
+    <% n = 1 %>
+    <% @rank_lyrics.each do |t| %>
+      <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-4 p-4">
+        <div class="flex items-center justify-start mb-4 w-full">
+          <p><%= "第#{n}位"%></p>
+          <%= link_to user_path(t.user.id), class: "inline-flex items-center ml-2" do %>
+            <% if t.user.user_profile.icon && t.user.user_profile.icon.url %>
+              <%= image_tag(t.user.user_profile.icon.url, class: 'rounded-circle', size: '25x25') %>
+            <% else %>
+              <%= image_tag('default.png', class: 'rounded-circle', size: '25x25') %>
+            <% end %>
+            <p class="ml-2"><%= t.user.user_profile.name %></p>
+          <% end %>
+        </div>
+        <p><%= "歌詞：#{t.phrase}" %></p>
+        <p><%= "詳細：#{t.detail}" %></p>
+        <p><%= "アーティスト：#{t.artist.name}" %></p>
+        <p><%= "曲：#{t.song.title}" %></p>
+        <p>
+          <%= "#{t.impressions_count} Views / month" %>
+          <%= link_to "Comments(#{t.comments.count})", lyric_path(t.id) %>
+        </p>
+        <br>
+        <% track = @tracks.find { |t_for_track| t_for_track[:lyric] == t } %>
+        <div class="flex items-center justify-center">
+          <% if track && track[:url] %>
+            <audio id='player' src='<%= track[:url] %>' controls class="mr-4"></audio>
+            <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
+            <script>
+              document.getElementById('player').volume = 0.1;
+            </script>
+          <% else %>
+            <p>No preview available</p>
+          <% end %>
+        </div>
+      </div>
+      <% n += 1 %>
     <% end %>
-  <% end %>
-  <p><%= "第#{n}位"%></p>
-  <p><%= "歌詞：#{t.phrase}" %></p>
-  <p><%= "詳細：#{t.detail}" %></p>
-  <p><%= "アーティスト：#{t.artist.name}" %></p>
-  <p><%= "曲：#{t.song.title}" %></p>
-  <p>
-    <%= "#{t.impressions_count} Views / month" %>
-    <%= link_to "Comments(#{t.comments.count})", lyric_path(t.id) %>
-  </p>
-  <% track = @tracks.find { |t_for_track| t_for_track[:lyric] == t } %>
-    <% if track && track[:url] %>
-      <p><audio id='player' src='<%= track[:url] %>' controls></audio></p>
-      <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
-      <script>
-        document.getElementById('player').volume = 0.1;
-      </script>
-    <% else %>
-      <p>No preview available</p>
-      <p></p>
-    <% end %>
-    <hr>
-  <% n += 1 %>
-<% end %>
+    <br>
+  </div>
+</div>

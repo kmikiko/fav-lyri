@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -14,42 +15,44 @@
   </head>
 
   <body>
-    <header>
-      <%= link_to image_tag("logo.png", class: "rounded-circle", size: "50x50"), lyrics_path %>
-      <% if user_signed_in? %>
-        <%= link_to user_path(current_user.id) do %>
-          <% if current_user.user_profile.icon && current_user.user_profile.icon.url %>
-            <object><%= image_tag(current_user.user_profile.icon.url, class: "rounded-circle", size: "35x35") %></object>
-          <% else %>
-            <object><%= image_tag("default.png", class: "rounded-circle", size: "35x35") %></object> 
-          <% end %>
+  <header>
+    <%= link_to image_tag("logo.png", class: "rounded-circle", size: "50x50"), lyrics_path %>
+    <% if user_signed_in? %>
+      <%= link_to user_path(current_user.id) do %>
+        <% if current_user.user_profile.icon && current_user.user_profile.icon.url %>
+          <%= image_tag(current_user.user_profile.icon.url, class: "rounded-circle nav-icon", size: "35x35") %>
+        <% else %>
+          <%= image_tag("default.png", class: "rounded-circle nav-icon", size: "35x35") %>
         <% end %>
-        <%= link_to image_tag("pen.png", class: "rounded-circle", size: "20x20"), new_lyric_path %>
-        <%= link_to notifications_path do %>
-          <% if @unchecked_notifications.any? %>
-            <object><%= image_tag("bell ringing.png", class: "rounded-circle", size: "20x20") %></object>
-          <% else %>
-            <object><%= image_tag("bell.png", class: "rounded-circle", size: "20x20") %></object>
-          <% end %>
-        <% end %>
-        <%= link_to "About Fav-lyri", root_path %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-        <% if current_user.admin == true %>
-          <%= link_to "管理者画面", rails_admin_path %>
-        <% end %>
-      <% else %>
-        <%= link_to "About Fav-lyri", root_path %>
-        <%= link_to "ログイン", new_user_session_path %>
-        <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
-        <%= link_to "管理者ゲストログイン", users_guest_admin_sign_in_path, method: :post %>
       <% end %>
-    </header>
-    <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
+      <%= link_to new_lyric_path do %>
+        <%= image_tag("pen.png", class: "rounded-circle nav-icon", size: "25x25") %>
+      <% end %>
+      <%= link_to notifications_path do %>
+        <% if @unchecked_notifications.any? %>
+          <%= image_tag("bell ringing.png", class: "rounded-circle nav-icon", size: "20x20") %>
+        <% else %>
+          <%= image_tag("bell.png", class: "rounded-circle nav-icon", size: "20x20") %>
+        <% end %>
+      <% end %>
+      <%= link_to "About Fav-lyri", root_path %>
+      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <% if current_user.admin == true %>
+        <%= link_to "管理者画面", rails_admin_path %>
+      <% end %>
+    <% else %>
+      <%= link_to "About Fav-lyri", root_path %>
+      <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
+      <%= link_to "管理者ゲストログイン", users_guest_admin_sign_in_path, method: :post %>
     <% end %>
-    <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
-    <% end %>
-    <%= yield %>
-  </body>
+  </header>
+  <% if notice %>
+    <p class="alert alert-notice"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+    <p class="alert alert-error"><%= alert %></p>
+  <% end %>
+  <%= yield %>
+</body>
 </html>

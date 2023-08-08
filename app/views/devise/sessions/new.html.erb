@@ -17,10 +17,12 @@
       <%= f.label :remember_me %>
     </div>
   <% end %>
-
+  <br />
   <div class="actions">
-    <%= f.submit t('.sign_in') %>
+    <button class="custom-button" type="submit">
+      <%= f.submit t('.sign_in') %>
+    </button>
   </div>
 <% end %>
-
+<br />
 <%= render "devise/shared/links" %>

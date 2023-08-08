@@ -36,8 +36,9 @@
       <%= f.label :feeling_ids, feeling.sort, value: feeling[:id] %>
     <% end %>
   </div>
-
-  <%= f.submit %>
+  <button class="custom-button" type="submit">
+    <%= f.submit %>
+  </button>
 <% end %>
 
 <%= link_to "投稿一覧にもどる", root_path %>

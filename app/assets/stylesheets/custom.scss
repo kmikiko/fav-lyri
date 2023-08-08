@@ -1,9 +1,6 @@
-header{
-  background-color: #7EBAA8;
-}
-
 body{
   background-color: #F4F5E2;
+  text-align: center;
 }
 
 a:link, a:visited, a:hover, a:active {
@@ -16,11 +13,48 @@ a:link, a:visited, a:hover, a:active {
   border-radius: 20%;
 }
 
+.nav-icon {
+  margin-right: 10px;
+}
+
 .search_ranking_button{
   display: flex; 
   align-items: center;
 }
 
-.ranking_button{
+header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  background-color: #7EBAA8;
+}
+
+header a {
   margin-left: 10px;
+}
+
+header a:first-child {
+  margin-left: 0;
+}
+
+.custom-button {
+  background-color:lightslategray;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  // cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.custom-button:hover {
+  background-color: rgb(165, 216, 240);
+}
+
+input[type="submit"] {
+  background-color: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
 }
