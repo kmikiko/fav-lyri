@@ -1,20 +1,20 @@
-<h1><%= @user.user_profile.name %>のフォロワー一覧</h1>
+<h1 class="text-2xl font-semibold mb-4"><%= @user.user_profile.name %>のフォロワー一覧</h1>
 
 <% if @followers.any? %>
-  <ul>
+  <div class="grid grid-cols-1 gap-4">
     <% @followers.each do |follower| %>
-      <p>
+      <div class="w-64 mx-auto bg-white shadow-md rounded-lg p-4">
         <%= link_to user_path(follower.id) do %>
           <% if follower.user_profile.icon && follower.user_profile.icon.url %>
-            <%= image_tag(follower.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
+            <%= image_tag(follower.user_profile.icon.url, class: "rounded-full w-12 h-12 mx-auto") %>
           <% else %>
-            <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+            <%= image_tag("default.png", class: "rounded-full w-12 h-12 mx-auto") %>
           <% end %>
         <% end %>
-        <%= follower.user_profile.name %></li>
-      </p>
+        <span class="block text-center mt-2"><%= follower.user_profile.name %></span>
+      </div>
     <% end %>
-  </ul>
+  </div>
 <% else %>
-  <p>フォロワーはまだいません。</p>
+  <p class="text-gray-500 mt-4 text-center">フォロワーはまだいません。</p>
 <% end %>

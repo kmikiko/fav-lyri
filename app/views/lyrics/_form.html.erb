@@ -1,6 +1,6 @@
-<%= form_with(model: @lyric, local: true) do |f| %>
+<%= form_with(model: @lyric, local: true, class: "max-w-md mx-auto") do |f| %>
   <% if @lyric.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="bg-red-100 text-red-600 px-4 py-3 mb-4 rounded-lg">
       <h2><%= @lyric.errors.count %>件のエラーがあります。</h2>
       <ul>
         <% @lyric.errors.full_messages.each do |msg| %>
@@ -10,35 +10,39 @@
     </div>
   <% end %>
 
-  <div class="lyric_phrase">
-    <%= f.label :phrase %>
-    <%= f.text_field :phrase %>
+  <div class="lyric_phrase mb-4">
+    <%= f.label :phrase, class: "block font-bold" %>
+    <%= f.text_field :phrase, class: "block w-full border rounded-lg px-4 py-2" %>
   </div>
-  <div class="lyric_detail">
-    <%= f.label :detail %>
-    <%= f.text_field :detail %>
+  <div class="lyric_detail mb-4">
+    <%= f.label :detail, class: "block font-bold" %>
+    <%= f.text_field :detail, class: "block w-full border rounded-lg px-4 py-2" %>
   </div>
-  <div class="song_title">
-  <%= f.fields_for :song do |s| %>
-    <%= s.label :title, "曲名" %>
-    <%= s.text_field :title %>
-  <% end %>
+  <div class="song_title mb-4">
+    <%= f.fields_for :song do |s| %>
+      <%= s.label :title, "曲名", class: "block font-bold" %>
+      <%= s.text_field :title, class: "block w-full border rounded-lg px-4 py-2" %>
+    <% end %>
   </div>
-  <div class="artist_name">
+  <div class="artist_name mb-4">
     <%= f.fields_for :artist do |a| %>
-      <%= a.label :name, "アーティスト名" %>
-      <%= a.text_field :name %>
+      <%= a.label :name, "アーティスト名", class: "block font-bold" %>
+      <%= a.text_field :name, class: "block w-full border rounded-lg px-4 py-2" %>
     <% end %>
   </div>
-  <div class="feeling_sort">
+  <div class="feeling_sort mb-4">
     <% Feeling.all.each do |feeling| %>
-      <%= f.check_box :feeling_ids, { multiple: true, checked: @lyric.feeling_ids.include?(feeling.id), disabled: feeling[:disabled], include_hidden: false }, feeling[:id] %>
-      <%= f.label :feeling_ids, feeling.sort, value: feeling[:id] %>
+      <label class="block items-center">
+        <%= f.check_box :feeling_ids, { multiple: true, checked: @lyric.feeling_ids.include?(feeling.id), disabled: feeling[:disabled], include_hidden: false }, feeling[:id], class: "form-checkbox" %>
+        <%= feeling.sort %>
+      </label>
     <% end %>
   </div>
-  <button class="custom-button" type="submit">
-    <%= f.submit %>
-  </button>
+  <div class="mb-4">
+    <button class="custom-button mt-4">
+      <%= f.submit "投稿する" %>
+    </button>
+  </div>
 <% end %>
 
-<%= link_to "投稿一覧にもどる", root_path %>
+<%= link_to "投稿一覧にもどる", lyrics_path, class: "block mt-4 text-blue-500 hover:underline" %>

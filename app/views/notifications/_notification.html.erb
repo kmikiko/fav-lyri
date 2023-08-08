@@ -1,40 +1,60 @@
-<% visitor = notification.visitor %>
-<% visited = notification.visited %>
+<div class="grid grid-cols-1 gap-4">
+  <% visitor = notification.visitor %>
+  <% visited = notification.visited %>
 
-<div class="col-md-6 mx-auto">
-  <div class="form-inline">
-    <span>
-      <%= link_to user_path(visitor) do %>
-        <%= image_tag visitor.user_profile.icon.url, class: "rounded-circle", size: "20x20" %>
-        <strong><%= visitor.user_profile.name %></strong>
-      <% end %>
-      さんが
-    </span>
-
-    <% case notification.action %>
-    <% when 'follow' then %>
-      <%= "あなたをフォローしました" %>
-    <% when 'like' then %>
-      <%= link_to 'あなたの投稿', notification.lyric, style: "font-weight: bold;" %>
-      <%= "にいいねしました" %>
-    <% when 'comment' then %>
-      <% if notification.lyric.user_id == visited.id %>
-        <%= link_to "あなたの投稿", notification.lyric, style: "font-weight: bold;" %>
-      <% else %>
-        <span>
-          <%= link_to lyric_path(notification.lyric) do %>
-            <%= image_tag image_url(notification.lyric.user.user_profile.icon).to_s, class: "icon_mini" %>
-            <strong><%= notification.lyric.user.user_profile.name %>さんの投稿</strong>
+  <div class="col-md-6 mx-auto">
+    <div class="bg-white shadow-md rounded-lg p-4 max-w-lg">
+      <div class="flex items-center mb-2">
+        <div class="mr-2">
+          <%= link_to user_path(visitor) do %>
+            <% if visitor.user_profile.icon && visitor.user_profile.icon.url %>
+              <%= image_tag(visitor.user_profile.icon.url, class: "rounded-full w-8 h-8") %>
+            <% else %>
+              <%= image_tag("default.png", class: "rounded-full w-8 h-8") %>
+            <% end %>
           <% end %>
-        </span>
-      <% end %>
-      <%= "にコメントしました" %>
-      <p class="text-muted mb-0">
-        <%= Comment.find_by(id: notification.comment_id)&.content %>
-      </p>
-    <% end %>
-  </div>
+        </div>
+        <div>
+          <strong><%= visitor.user_profile.name %></strong> さんが
+        </div>
+      </div>
 
-    <%= notification.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
-  <hr>
+      <% case notification.action %>
+      <% when 'follow' then %>
+        <div class="mt-2">
+          あなたをフォローしました
+        </div>
+      <% when 'like' then %>
+        <div class="mt-2">
+          <%= link_to 'あなたの投稿', notification.lyric, class: "font-bold" %> にいいねしました
+        </div>
+      <% when 'comment' then %>
+        <div class="mt-2">
+          <% if notification.lyric.user_id == visited.id %>
+            <%= link_to "あなたの投稿", notification.lyric, class: "font-bold" %>
+          <% else %>
+            <span>
+              <%= link_to lyric_path(notification.lyric) do %>
+                <% if notification.lyric.user.user_profile.icon && notification.lyric.user.user_profile.icon.url %>
+                  <%= image_tag(notification.lyric.user.user_profile.icon.url, class: "rounded-full w-8 h-8") %>
+                <% else %>
+                  <%= image_tag("default.png", class: "rounded-full w-8 h-8") %>
+                <% end %>
+                <strong><%= notification.lyric.user.user_profile.name %> さんの投稿</strong>
+              <% end %>
+            </span>
+          <% end %>
+          にコメントしました
+          <p class="text-muted mb-0">
+            <%= Comment.find_by(id: notification.comment_id)&.content %>
+          </p>
+        </div>
+      <% end %>
+
+      <div class="text-sm text-gray-500 mt-2">
+        <%= notification.created_at.strftime("%Y年%m月%d日 %H時%M分") %>
+      </div>
+    </div>
+    <br>
+  </div>
 </div>

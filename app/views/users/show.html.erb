@@ -1,66 +1,83 @@
-<p>User Page</p>
-<% if @user.user_profile.icon && @user.user_profile.icon.url %>
-  <%= image_tag(@user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
-<% else %>
-  <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
-<% end %>
-<p><%= @user.user_profile.name %></p>
-<p><%= @user.user_profile.introduction %></p>
-
-<% if user_signed_in? && current_user != @user %>
-  <%= render 'follow_form' , user: @user %>
-<% end %>
-
-<% if current_user == @user %>
-  <p>メールアドレス : <%= @user.email %></p>
-  <%= button_to "favorites", user_favorites_user_path, method: :get %>
-  <%= button_to "follower", show_followers_user_path, method: :get %>
-  <%= button_to "follow", show_following_user_path, method: :get %>
-  <% if current_user.email != 'guest@example.com' && current_user.email != 'guest-admin@example.com' %>
-  <%= link_to "編集", edit_user_registration_path %>
+  <p>User Page</p>
+  <% if current_user == @user %>
+    <% if current_user.email != 'guest@example.com' && current_user.email != 'guest-admin@example.com' %>
+      <%= link_to "編集", edit_user_registration_path %>
+    <% end %>
   <% end %>
-  <% if @following_lyrics.any? %>  
-    <table>
-      <tr>
-        <th></th>
-        <th>ユーザー</th>
-        <th>歌詞</th>
-        <th>詳細</th>
-        <th>曲名</th>
-        <th>アーティスト名</th>
-        <th>聴きたい気分</th>
-        <th></th>
-      </tr>
+  <div class="mt-4 flex justify-center">
+    <% if @user.user_profile.icon && @user.user_profile.icon.url %>
+      <%= image_tag(@user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
+    <% else %>
+      <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+    <% end %>
+  </div>
+  <p><%= @user.user_profile.name %></p>
+  <p><%= @user.user_profile.introduction %></p>
 
-      <% @following_lyrics.each do |lyric| %>
-        <tr>
-          <td>
-            <%= link_to user_path(lyric.user.id) do %>
-              <% if lyric.user.user_profile.icon && lyric.user.user_profile.icon.url %>
-                <%= image_tag(lyric.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %>
-              <% else %>
-                <%= image_tag("default.png", class: "rounded-circle", size: "25x25") %>
-              <% end %>
-            <% end %>   
-          </td> 
-          <td><%= lyric.user.user_profile.name %></td>
-          <td><%= lyric.phrase %></td>
-          <td><%= lyric.detail %></td>
-          <td><%= lyric.song.title %></td>
-          <td><%= lyric.artist.name %></td>
-          <td>
-            <% lyric.feelings.each do |feeling| %>
-              <%= feeling.sort %>
-            <% end %>
-          </td>
-          <td><%= link_to '詳細', lyric_path(lyric.id) %></td>
-          <td><%= lyric.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-        </tr>
-      <% end %>
-    </table>
+  <% if user_signed_in? && current_user != @user %>
+    <%= render 'follow_form' , user: @user %>
   <% end %>
+
+  <% if current_user == @user %>
+    <p>メールアドレス : <%= @user.email %></p>
+    <button class="custom-button mt-4">
+      <%= button_to "favorites", user_favorites_user_path, method: :get %>
+    </button>
+    <button class="custom-button mt-4">
+      <%= button_to "follower", show_followers_user_path, method: :get %>
+    </button>
+    <button class="custom-button mt-4">
+      <%= button_to "follow", show_following_user_path, method: :get %>
+    </button>
+    <% if @following_lyrics.any? %>
+  <div class="container mx-auto py-8">
+    <div class="overflow-x-auto">
+      <table class="w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ユーザー</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">歌詞</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">詳細</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">曲名</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">アーティスト名</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">聴きたい気分</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">投稿日時</th>
+            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">詳細</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <% @following_lyrics.each do |lyric| %>
+            <tr>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <%= link_to user_path(lyric.user.id) do %>
+                  <% if lyric.user.user_profile.icon && lyric.user.user_profile.icon.url %>
+                    <%= image_tag(lyric.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %>
+                  <% else %>
+                    <%= image_tag("default.png", class: "rounded-circle", size: "25x25") %>
+                  <% end %>
+                  <%= lyric.user.user_profile.name %>
+                <% end %>   
+              </td> 
+              <td class="px-6 py-4 whitespace-nowrap text-sm"><%= lyric.phrase %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm"><%= lyric.detail %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm"><%= truncate(lyric.song.title, length: 8) %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm"><%= lyric.artist.name %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <% lyric.feelings.each do |feeling| %>
+                  <%= feeling.sort %>
+                <% end %>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm"><%= lyric.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm">
+                <%= link_to '詳細', lyric_path(lyric.id), class: "text-blue-500" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 <% end %>
-
-
+  <% end %>
 
 

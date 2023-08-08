@@ -1,24 +1,30 @@
 <ul>
-  <% comments.each do |comment| %>
+  <% comments.order(created_at: :desc).each do |comment| %>
     <% if comment.id.present? %>
-        <p><%= comment.content %></p>
-        <p>
-          <%= link_to user_path(comment.user.id) do %>
-            <% if comment.user.user_profile.icon && comment.user.user_profile.icon.url %>
-              <%= image_tag(comment.user.user_profile.icon.url, class: "rounded-circle", size: "30x30")%>
-            <% else %>
-              <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+      <li class="py-4">
+        <div class="bg-white rounded-lg shadow-md p-4 md:w-4/5 lg:w-3/5 xl:w-2/5 mx-auto">
+          <div class="flex items-center mb-2">
+            <%= link_to user_path(comment.user.id), class: "flex items-center" do %>
+              <% if comment.user.user_profile.icon && comment.user.user_profile.icon.url %>
+                <%= image_tag(comment.user.user_profile.icon.url, class: "rounded-circle w-8 h-8") %>
+              <% else %>
+                <%= image_tag("default.png", class: "rounded-circle w-8 h-8") %>
+              <% end %>
+              <span class="ml-2 font-semibold"><%= comment.user.user_profile.name %></span>
             <% end %>
-            <%= comment.user.user_profile.name %>
-          <% end %>
-          <%= comment.created_at.strftime('%Y年%m月%d日 %H:%M') %>
-          <% if current_user == comment.user %>
-            <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true %>
-            <%= link_to "削除", lyric_comment_path(comment.lyric_id, comment.id), method: :delete, remote: true,
-                                        data: { confirm: "本当に削除しますか?"} %>
-          <% end %>
-        </p>
-        <div class="comment-content" id ="this_comment_<%= comment.id %>"></div>
+            <span class="ml-2 text-xs text-gray-500"><%= comment.created_at.strftime('%Y年%m月%d日 %H:%M') %></span>
+            <% if current_user == comment.user %>
+              <div class="ml-auto space-x-2">
+                <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true, class: "text-xs underline" %>
+                <%= link_to "削除", lyric_comment_path(comment.lyric_id, comment.id), method: :delete, remote: true,
+                                          data: { confirm: "本当に削除しますか?" }, class: "text-xs underline" %>
+              </div>
+            <% end %>
+          </div>
+          <p><%= comment.content %></p>
+          <div class="comment-content" id="this_comment_<%= comment.id %>"></div>
+        </div>
+      </li>
     <% end %>
   <% end %>
 </ul>

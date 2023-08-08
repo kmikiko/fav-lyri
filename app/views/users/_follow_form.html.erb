@@ -2,11 +2,15 @@
   <% unless current_user.following?(user) %>
     <%= form_with(model: current_user.active_relationships.build(followed_id: user.id), local: false) do |f| %>
       <%= f.hidden_field :followed_id %>
-      <%= f.submit "follow" %>
+      <button class="custom-button mt-4">
+        <%= f.submit "follow" %>
+      </button>  
     <% end %>
   <% else %>
     <%= form_with(model: current_user.active_relationships.find_by(followed_id: user.id), method: :delete, local: false) do |f| %>
-      <%= f.submit "follow解除" %>
+      <button class="custom-button mt-4">
+        <%= f.submit "follow解除" %>
+      </button>
     <% end %>
   <% end %>
 </div>

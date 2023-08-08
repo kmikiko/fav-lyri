@@ -1,51 +1,59 @@
-<%= link_to user_path(@lyric.user.id) do %>
-  <% if @lyric.user.user_profile.icon && @lyric.user.user_profile.icon.url %>
-    <object><%= image_tag(@lyric.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %></object>
-  <% else %>
-    <object><%= image_tag("default.png", class: "rounded-circle", size: "25x25") %></object> 
-  <% end %>
-<% end %>
-<object><%= @lyric.user.user_profile.name %></object>
-<p>歌詞: <%= @lyric.phrase %></p>
-<p>詳細: <%= @lyric.detail %></p>
-<p>曲名: <%= @lyric.song.title %></p>
-<p>アーティスト名: <%= @lyric.artist.name %></p>
-<p>
+<br>
+<div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-4 p-4">
+  <div class="flex items-center justify-start mb-4 w-full">
+    <%= link_to user_path(@lyric.user.id), class: "inline-flex items-center ml-2" do %>
+      <% if @lyric.user.user_profile.icon && @lyric.user.user_profile.icon.url %>
+        <%= image_tag(@lyric.user.user_profile.icon.url, class: "rounded-circle", size: "25x25") %>
+      <% else %>
+        <%= image_tag("default.png", class: "rounded-circle", size: "25x25") %>
+      <% end %>
+      <p class="ml-2"><%= @lyric.user.user_profile.name %></p>
+    <% end %>
+    <span class="ml-2 text-xs text-gray-500"><%= @lyric.created_at.strftime("%Y-%m-%d %H:%M:%S")  %></span>
+  </div>
+  <p>歌詞: <%= @lyric.phrase %></p>
+  <p>詳細: <%= @lyric.detail %></p>
+  <p>曲名: <%= @lyric.song.title %></p>
+  <p>アーティスト名: <%= @lyric.artist.name %></p>
+  <p>
   <% @lyric.feelings.each do |feeling| %>
-    <%= feeling.sort %>
+    <span class="px-2 py-1 bg-gray-200 rounded-full text-sm text-gray-800">
+      <%= feeling.sort %>
+    </span>
   <% end %>
 </p>
+<br>
 
-<% track = @tracks.find { |t| t[:lyric] == @lyric } %>
-<% if track && track[:url] %>
-  <p><audio id="player" src="<%= track[:url] %>" controls></audio></p>
-  <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
-  <script>
-    document.getElementById('player').volume = 0.1;
-  </script>
-<% else %>
-  <p>No preview available</p>
-  <p></p>
-<% end %>
-<p><%= @lyric.created_at.strftime("%Y-%m-%d %H:%M:%S")  %></p>
-<% if user_signed_in? %>
-  <% unless @lyric.user_id == current_user.id %>
-    <% if @favorite.present? %> 
-      <%= link_to 'お気に入り解除', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+  <% track = @tracks.find { |t| t[:lyric] == @lyric } %>
+  <div class="flex items-center justify-center">
+    <% if track && track[:url] %>
+      <p><audio id="player" src="<%= track[:url] %>" controls></audio></p>
+      <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
+      <script>
+        document.getElementById('player').volume = 0.1;
+      </script>
     <% else %>
-      <%= link_to 'お気に入り', favorites_path(lyric_id: @lyric.id), method: :post, class: 'btn btn-primary' %>
+      <p>No preview available</p>
+      <p></p>
     <% end %>
+  </div>
+  <% if user_signed_in? %>
+    <% unless @lyric.user_id == current_user.id %>
+      <% if @favorite.present? %> 
+        <%= link_to 'お気に入り解除', favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+      <% else %>
+        <%= link_to 'お気に入り', favorites_path(lyric_id: @lyric.id), method: :post, class: 'btn btn-primary' %>
+      <% end %>
+    <% else %>
+      <%= link_to "編集", edit_lyric_path(@lyric.id) %>
+      <%= link_to '削除', lyric_path(@lyric.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %>
+    <% end %> 
+</div>  
+    <%= render partial: 'comments/form', locals: { comment: @comment, lyric: @lyric } %>
   <% else %>
-    <%= link_to "編集", edit_lyric_path(@lyric.id) %>
-    <%= link_to '削除', lyric_path(@lyric.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %>
+    <%= link_to "ログインするとコメントができます！", new_user_session_path %>
   <% end %>
-  <hr>
-  <%= render partial: 'comments/form', locals: { comment: @comment, lyric: @lyric } %>
-<% else %>
-  <%= link_to "ログインするとコメントができます！", new_user_session_path %>
-<% end %>
 
-<div id="comments_area">
-  <%= render partial: 'comments/index', locals: { comments: @comments, lyric: @lyric } %>
-</div>
-
+  <div id="comments_area">
+    <%= render partial: 'comments/index', locals: { comments: @comments, lyric: @lyric } %>
+  </div>

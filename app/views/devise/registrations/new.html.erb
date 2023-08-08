@@ -29,8 +29,14 @@
       <%= info.label :introduction %><br />
       <%= info.text_field :introduction %><br />
 
-      <%= info.label :icon %><br />
-      <%= info.file_field :icon %><br />
+      <div class="mt-4 flex justify-center">
+        <div class="mt-1 flex items-center">
+          <label for="icon" class="custom-button" >
+            <%= t('.select_icon') %>
+          </label>
+          <%= info.file_field :icon, id: "icon", class: "hidden" %>
+        </div>
+      </div>
       <%= info.hidden_field :image_cache %> 
     <% end %>
   </div>

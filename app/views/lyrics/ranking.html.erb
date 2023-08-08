@@ -28,10 +28,10 @@
         <% track = @tracks.find { |t_for_track| t_for_track[:lyric] == t } %>
         <div class="flex items-center justify-center">
           <% if track && track[:url] %>
-            <audio id='player' src='<%= track[:url] %>' controls class="mr-4"></audio>
+            <audio id='player_<%= n %>' src='<%= track[:url] %>' controls class="mr-4"></audio>
             <p><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
             <script>
-              document.getElementById('player').volume = 0.1;
+              document.getElementById('player_<%= n %>').volume = 0.1;
             </script>
           <% else %>
             <p>No preview available</p>

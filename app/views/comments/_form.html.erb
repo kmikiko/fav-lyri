@@ -10,11 +10,11 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.text_area :content %>
+  <div class="mt-4">
+    <%= form.text_area :content, class: "w-full md:w-1/3 p-4 rounded-lg focus:bg-white focus:outline-none resize-none" %>
   </div>
 
-  <div class="actions">
+  <button class="custom-button" type="submit">
     <%= form.submit "Comment" %>
-  </div>
+  </button>
 <% end %>

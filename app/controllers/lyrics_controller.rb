@@ -21,7 +21,7 @@ class LyricsController < ApplicationController
     @lyric = Lyric.new(lyric_params)
     @lyric.user_id = current_user.id
     if @lyric.save
-      redirect_to root_path
+      redirect_to lyrics_path
     else
       render :new
     end
@@ -32,7 +32,7 @@ class LyricsController < ApplicationController
 
   def update
     if @lyric.update(lyric_params)
-      redirect_to root_path
+      redirect_to lyrics_path
     else
       render :edit
     end
@@ -57,7 +57,7 @@ class LyricsController < ApplicationController
 
   def destroy
     @lyric.destroy
-    redirect_to root_path
+    redirect_to lyrics_path
   end
 
   def ranking

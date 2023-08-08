@@ -1,42 +1,49 @@
-<h1>お気に入り一覧</h1>
-
-<% if @favorites.any? %>
-  <table>
-    <tr>
-      <th></th>
-      <th>ユーザー名</th>
-      <th>歌詞</th>
-      <th>詳細</th>
-      <th>曲名</th>
-      <th>アーティスト名</th>
-      <th>聴きたい気分</th>
-      <th></th>
-    </tr>
-    <% @favorites.each do |favorite| %>
-      <tr>
-        <td>
-          <%= link_to lyric_path(favorite.lyric.id) do %>
-            <% if favorite.lyric.user.user_profile.icon && favorite.lyric.user.user_profile.icon.url %>
-              <%= image_tag(favorite.lyric.user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
-            <% else %>
-              <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= favorite.lyric.user.user_profile.name %></td>
-        <td><%= favorite.lyric.phrase %></td>
-        <td><%= favorite.lyric.detail %></td>
-        <td><%= favorite.lyric.song.title %></td>
-        <td><%= favorite.lyric.artist.name %></td>
-        <td>
-          <% favorite.lyric.feelings.each do |feeling| %>
-            <%= feeling.sort %>
-          <% end %>
-        </td>
-        <td><%= favorite.lyric.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
-      </tr>
-    <% end %>
-  </table>
-<% else %>
-  <p>お気に入りした投稿はありません。</p>
-<% end %>
+<div class="container mx-auto py-8">
+  <h1 class="text-2xl font-bold mb-4">お気に入り一覧</h1>
+  <% if @favorites.any? %>
+    <table class="w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ユーザー名</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">歌詞</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">詳細</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">曲名</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">アーティスト名</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">聴きたい気分</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @favorites.each do |favorite| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <%= link_to lyric_path(favorite.lyric.id) do %>
+                <% if favorite.lyric.user.user_profile.icon && favorite.lyric.user.user_profile.icon.url %>
+                  <%= image_tag(favorite.lyric.user.user_profile.icon.url, class: "rounded-circle", size: "35x35") %>
+                <% else %>
+                  <%= image_tag("default.png", class: "rounded-circle", size: "35x35") %>
+                <% end %>
+              <% end %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= favorite.lyric.user.user_profile.name %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= favorite.lyric.phrase %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= truncate(favorite.lyric.detail, length: 8) %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= favorite.lyric.song.title %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= favorite.lyric.artist.name %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <% favorite.lyric.feelings.each do |feeling| %>
+                <span class="px-2 py-1 bg-gray-200 rounded-full text-xs text-gray-800">
+                  <%= feeling.sort %>
+                </span>
+              <% end %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= favorite.lyric.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>お気に入りした投稿はありません。</p>
+  <% end %>
+</div>
