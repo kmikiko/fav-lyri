@@ -16,6 +16,7 @@ class Lyric < ApplicationRecord
 
   scope :recently_created, -> { where('created_at >= ?', 1.month.ago) }
   scope :ranked, -> { order(impressions_count: :desc) }
+  scope :with_associations, -> { includes(:song, :artist, :comments, user: :user_profile) }
 
   def self.ransackable_attributes(auth_object = nil)
     %w[id phrase]

@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create, :destroy]
   respond_to? :js 
   def create
     @user = User.find(params[:relationship][:followed_id])

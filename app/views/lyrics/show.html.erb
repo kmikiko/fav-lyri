@@ -9,19 +9,18 @@
       <% end %>
       <p class="ml-2"><%= @lyric.user.user_profile.name %></p>
     <% end %>
-    <span class="ml-2 text-xs text-gray-500"><%= @lyric.created_at.strftime("%Y-%m-%d %H:%M:%S")  %></span>
+    <span class="ml-2 text-xs text-gray-500"><%= @lyric.created_at.strftime("%Y-%m-%d %H:%M")  %></span>
   </div>
-  <p>歌詞: <%= @lyric.phrase %></p>
-  <p>詳細: <%= @lyric.detail %></p>
-  <p>曲名: <%= @lyric.song.title %></p>
-  <p>アーティスト名: <%= @lyric.artist.name %></p>
+  <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= @lyric.phrase %></p>
+  <p><%= @lyric.detail %></p>
+  <p><%= @lyric.song.title %> / <%= @lyric.artist.name %></p>
   <p>
   <% @lyric.feelings.each do |feeling| %>
-    <span class="px-2 py-1 bg-gray-200 rounded-full text-sm text-gray-800">
+    <span class="px-2 py-1 bg-yellow-100 rounded-full text-sm text-gray-500">
       <%= feeling.sort %>
     </span>
   <% end %>
-</p>
+  </p>
 <br>
 
   <% track = @tracks.find { |t| t[:lyric] == @lyric } %>

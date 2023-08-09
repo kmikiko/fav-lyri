@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:show_favorites, :show_followers, :show_following]
   def show
     @user = User.find(params[:id]) 
-    @following_lyrics = @user.following.map { |user| user.lyrics }.flatten.sort_by(&:created_at).reverse
+    following_users = @user.following + [@user]
+    @following_lyrics = Lyric.where(user_id: following_users).order(created_at: :desc)
   end
 
   def show_favorites

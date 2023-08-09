@@ -18,8 +18,8 @@ ja:
         email: メールアドレス
         password: パスワード
       lyric:
-        phrase: フレーズ
-        detail: 詳細
+        phrase: お気に入りの歌詞
+        detail: 歌詞の解釈やエピソード
       comment:
         content: 内容
       song:

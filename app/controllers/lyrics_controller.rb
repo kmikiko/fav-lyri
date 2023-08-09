@@ -61,7 +61,8 @@ class LyricsController < ApplicationController
   end
 
   def ranking
-    @rank_lyrics = Lyric.recently_created.ranked.includes(:song, :artist, user: :user_profile).limit(5)
+    @rank_lyrics = Lyric.recently_created.ranked.with_associations.limit(5)
+    @lyric_comments_count = Comment.where(lyric_id: @rank_lyrics.map(&:id)).group(:lyric_id).count
     @tracks = []
     @rank_lyrics.each do |rank_lyric|
       song = rank_lyric.song.title

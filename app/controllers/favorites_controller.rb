@@ -1,9 +1,9 @@
 class FavoritesController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
   def create
     favorite = current_user.favorites.create(lyric_id: params[:lyric_id])
     lyric = Lyric.find(params[:lyric_id])
     lyric.create_notification_favorite!(current_user)
-    # render json: { message: 'お気に入りに登録しました' }, status: :created
     redirect_to lyrics_path, notice: "#{favorite.lyric.user.user_profile.name}さんの投稿をお気に入り登録しました"
   end
 
