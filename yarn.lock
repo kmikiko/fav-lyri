@@ -6458,7 +6458,7 @@ postcss-preset-env@^6.7.0:
     postcss-selector-matches "^4.0.0"
     postcss-selector-not "^4.0.0"
 
-postcss-preset-env@^9.1.1:
+postcss-preset-env@^9.1.0:
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/postcss-preset-env/-/postcss-preset-env-9.1.1.tgz#0217fd0d41b9f62f10e1e2c8c5502bbdcb1a76b1"
   integrity sha512-rMPEqyTLm8JLbvaHnDAdQg6SN4Z/NDOsm+CRefg4HmSOiNpTcBXaw4RAaQbfTNe8BB75l4NpoQ6sMdrutdEpdQ==
