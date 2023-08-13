@@ -3,13 +3,6 @@ const tailwindConfig = require('./tailwind.config.js');
 const fullConfig = resolveConfig(tailwindConfig);
 
 module.exports = {
-  theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Inter var', ...fullConfig.theme.fontFamily.sans],
-      },
-    },
-  },
   purge: {
     enabled: true,
     content: [
@@ -18,6 +11,13 @@ module.exports = {
       './app/javascript/**/*.js',
       './app/views/**/*.{erb,haml,html,slim}'
     ],
+  },
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter var', ...fullConfig.theme.fontFamily.sans],
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

@@ -11,10 +11,10 @@ module.exports = {
         },
       },
     }),
+    require('postcss-merge-longhand')(), 
     require('autoprefixer'),
     require('postcss-import'),
     require('postcss-flexbugs-fixes'),
-    require('postcss-merge-longhand')(), 
     require('postcss-preset-env')({
       autoprefixer: {
         flexbox: 'no-2009',
