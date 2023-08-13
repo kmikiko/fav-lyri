@@ -25,7 +25,7 @@ module.exports = {
                 plugins: {
                   autoprefixer: {},
                   cssnano: {},
-                  // 他のプラグイン
+                  postcss-merge-longhand: {},
                 },
               },
             },
