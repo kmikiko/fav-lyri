@@ -38,7 +38,7 @@ artist_names.each_with_index do |name, index|
   )
   artist_lyrics[name] = artist_lyric
 
-  artist = Artist.create(name: name, lyric: artist_lyric)
+  artist = Artist.create(name: name, lyric_id: artist_lyric.id)
 
   song_lyric = Lyric.create(
     phrase: "Song lyric for #{song_titles[index]}",
