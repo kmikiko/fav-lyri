@@ -27,15 +27,19 @@ end
 song_titles = ["マリーゴールド", "うっせぇわ", "プロローグ", "カブトムシ", "怪獣の花唄"]
 
 artist_names = ["あいみょん", "Ado", "Uru", "aiko", "Vaundy"]
+artist_lyrics = {} 
+
 artist_names.each_with_index do |name, index|
   user = User.all.sample
-  lyric = Lyric.create(
+
+  artist_lyric = Lyric.create(
     phrase: "Lyric phrase for #{name}",
     detail: "Lyric detail for #{name}",
     user: user
   )
-  
-  artist = Artist.create(name: name, lyric: lyric)
+  artist_lyrics[name] = artist_lyric
+
+  artist = Artist.create(name: name, lyric: artist_lyric)
 
   song_lyric = Lyric.create(
     phrase: "Song lyric for #{song_titles[index]}",
@@ -50,6 +54,10 @@ comment_contents = ["めっちゃいい歌詞！", "この歌詞好きです。"
 Lyric.all.each do |lyric|
   user = User.all.sample
   
-  Comment.create(content: comment_contents.sample, lyric: lyric, user: user)
-  Favorite.create(user: user, lyric: lyric)
+  comment = Comment.new(content: comment_contents.sample, user: user)
+  comment.lyric = lyric
+  comment.save
+
+  favorite = Favorite.new(user: user, lyric: lyric)
+  favorite.save
 end
