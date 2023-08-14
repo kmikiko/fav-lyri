@@ -5,10 +5,11 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-# feelings = ['悲しい時', '嬉しい時', '恋しい時', '楽しみたい時', '悔しい時', '疲れている時', 'イライラしている時', '切ない時']
-# feelings.each do |feeling_type|
-#   Feeling.create!(sort: feeling_type)
-# end
+
+feelings = ['悲しい時', '嬉しい時', '恋しい時', '楽しみたい時', '悔しい時', '疲れている時', 'イライラしている時', '切ない時']
+feelings.each do |feeling_type|
+  Feeling.create!(sort: feeling_type)
+end
 
 user_names = ["Yumi", "Mai", "Kei", "Kaoru", "Shoma"]
 user_names.each do |name|
@@ -59,7 +60,12 @@ artist_names.each_with_index do |name, index|
   )
 end
 
-comment_contents = ["めっちゃいい歌詞！", "この歌詞好きです。", "何度も聞くと意味がわかってきた！", "私もこれ好き！", "やばい！"]
+comment_contents = 
+  ["めっちゃいい歌詞！", 
+    "この歌詞好きです。", 
+    "何度も聞くと意味がわかってきた！", 
+    "私もこれ好き！", 
+    "やばい！"]
 Lyric.all.each do |lyric|
   user = User.all.sample
 
