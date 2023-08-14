@@ -10,17 +10,16 @@
 #   Feeling.create!(sort: feeling_type)
 # end
 
-user_names = ["John", "Jane", "Michael", "Emily", "David"]
+user_names = ["Yumi", "Mai", "Kei", "Kaoru", "Shoma"]
 user_names.each do |name|
   user = User.create(
     email: "#{name.downcase}@example.com",
     password: "password",
-    confirmed_at: Time.now
   )
   
   UserProfile.create(
     name: name,
-    user: user
+    user_id: user.id
   )
 end
 
