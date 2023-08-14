@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 feelings = ['悲しい時', '嬉しい時', '恋しい時', '楽しみたい時', '悔しい時', '疲れている時', 'イライラしている時', '切ない時']
 feelings.each do |feeling_type|
-  Feeling.create!(type: feeling_type)
+  Feeling.create!(sort: feeling_type)
 end
