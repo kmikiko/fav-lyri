@@ -2,8 +2,8 @@
   <% comments.order(created_at: :desc).each do |comment| %>
     <% if comment.id.present? %>
       <li class="py-4">
-        <div class="bg-white rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/5 xl:w-2/5 mx-auto"> <!-- w-full を追加 -->
-          <div class="flex items-start mb-2"> <!-- items-start に変更 -->
+        <div class="bg-white rounded-lg shadow-md p-4 w-full md:w-4/5 lg:w-3/5 xl:w-2/5 mx-auto"> 
+          <div class="flex items-start mb-2"> 
             <%= link_to user_path(comment.user.id), class: "flex items-center" do %>
               <% if comment.user.user_profile.icon && comment.user.user_profile.icon.url %>
                 <%= image_tag(comment.user.user_profile.icon.url, class: "rounded-circle w-8 h-8") %>
@@ -11,17 +11,18 @@
                 <%= image_tag("default.png", class: "rounded-circle w-8 h-8") %>
               <% end %>
               <span class="ml-2 font-semibold"><%= comment.user.user_profile.name %></span>
+              <span class="ml-2 text-xs text-gray-500"><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></span>
             <% end %>
-            <div class="ml-auto text-xs text-gray-500"><%= comment.created_at.strftime('%Y-%m-%d %H:%M') %></div>
             <% if current_user == comment.user %>
               <div class="ml-auto space-x-2">
-                <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true, class: "text-xs underline" %>
+                <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true, class: "text-xs", data: { turbolinks: false }  %>
                 <%= link_to "削除", lyric_comment_path(comment.lyric_id, comment.id), method: :delete, remote: true,
-                                          data: { confirm: "本当に削除しますか?" }, class: "text-xs underline" %>
+                                          data: { confirm: "本当に削除しますか?" }, class: "text-xs" %>
               </div>
             <% end %>
           </div>
           <p class="text-sm mb-2"><%= comment.content %></p>
+          <div  class="comment-content" id ="this_comment_<%= comment.id %>"></div>
         </div>
       </li>
     <% end %>
