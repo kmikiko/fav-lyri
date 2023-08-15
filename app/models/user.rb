@@ -43,7 +43,7 @@ class User < ApplicationRecord
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.skip_confirmation! 
+      # user.skip_confirmation! 
       user.build_user_profile(name: "ゲスト")
     end
   end
@@ -51,7 +51,7 @@ class User < ApplicationRecord
   def self.guest_admin
     find_or_create_by!(email: 'guest-admin@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.skip_confirmation! 
+      # user.skip_confirmation! 
       user.build_user_profile(name: "ゲスト")
       user.admin = true
     end
