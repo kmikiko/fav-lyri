@@ -40,9 +40,11 @@
     </div>
     <br>
   <% end %>
-  <button class="custom-button mt-4">
-    <%= button_to "新規投稿", new_lyric_path, method: :get, class: "w-full px-4 py-2 rounded-lg text-white font-semibold shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" %>
-  </button>
+  <% if user_signed_in? %>
+    <button class="custom-button mt-4">
+      <%= button_to "新規投稿", new_lyric_path, method: :get, class: "w-full px-4 py-2 rounded-lg text-white font-semibold shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" %>
+    </button>
+  <% end %>
 </div>
 
 
