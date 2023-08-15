@@ -96,17 +96,18 @@
 
   <h2 class="text-2xl font-semibold mt-8 text-center">Why don't you enjoy fav-lyri?</h2>
 </div>
+<% unless user_signed_in? %>
+  <div class="flex justify-center space-x-4 mt-4 mb-16">
+    <button class="custom-button">
+      <%= button_to "ログイン", new_user_session_path, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </button>
 
-<div class="flex justify-center space-x-4 mt-4 mb-16">
-  <button class="custom-button">
-    <%= button_to "ログイン", new_user_session_path, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
-  </button>
+    <button class="custom-button">
+      <%= button_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </button>
 
-  <button class="custom-button">
-    <%= button_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
-  </button>
-
-  <button class="custom-button">
-    <%= button_to "管理者ゲストログイン", users_guest_admin_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
-  </button>
-</div>
+    <button class="custom-button">
+      <%= button_to "管理者ゲストログイン", users_guest_admin_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+    </button>
+  </div>
+<% end %>
