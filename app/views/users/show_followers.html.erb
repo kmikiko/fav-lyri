@@ -1,20 +1,22 @@
-<h1 class="text-2xl font-semibold mb-4"><%= @user.user_profile.name %>のフォロワー一覧</h1>
+<div class="container mx-auto py-8">
+  <h1 class="text-2xl font-semibold mb-4"><%= @user.user_profile.name %>のフォロワー一覧</h1>
 
-<% if @followers.any? %>
-  <div class="grid grid-cols-1 gap-4">
-    <% @followers.each do |follower| %>
-      <div class="w-64 mx-auto bg-white shadow-md rounded-lg p-4">
-        <%= link_to user_path(follower.id) do %>
-          <% if follower.user_profile.icon && follower.user_profile.icon.url %>
-            <%= image_tag(follower.user_profile.icon.url, class: "rounded-full w-12 h-12 mx-auto") %>
-          <% else %>
-            <%= image_tag("default.png", class: "rounded-full w-12 h-12 mx-auto") %>
+  <% if @followers.any? %>
+    <div class="grid grid-cols-1 gap-4">
+      <% @followers.each do |follower| %>
+        <div class="w-64 mx-auto bg-white shadow-md rounded-lg p-4">
+          <%= link_to user_path(follower.id) do %>
+            <% if follower.user_profile.icon && follower.user_profile.icon.url %>
+              <%= image_tag(follower.user_profile.icon.url, class: "rounded-full w-12 h-12 mx-auto") %>
+            <% else %>
+              <%= image_tag("default.png", class: "rounded-full w-12 h-12 mx-auto") %>
+            <% end %>
           <% end %>
-        <% end %>
-        <span class="block text-center mt-2"><%= follower.user_profile.name %></span>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <p class="text-gray-500 mt-4 text-center">フォロワーはまだいません。</p>
-<% end %>
+          <span class="block text-center mt-2"><%= follower.user_profile.name %></span>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 mt-4 text-center">フォロワーはまだいません。</p>
+  <% end %>
+</div>

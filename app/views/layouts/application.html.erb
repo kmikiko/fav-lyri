@@ -45,9 +45,11 @@
       <%= link_to "管理者ゲストログイン", users_guest_admin_sign_in_path, method: :post %>
     <% end %>
   </header>
+  <br>
   <% if notice %>
     <p class="alert alert-notice"><%= notice %></p>
   <% end %>
+  <br>
   <% if alert %>
     <p class="alert alert-error"><%= alert %></p>
   <% end %>

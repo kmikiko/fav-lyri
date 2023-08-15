@@ -23,6 +23,11 @@ a:link, a:visited, a:hover, a:active {
 }
 
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; 
   display: flex;
   justify-content: flex-start;
   align-items: center;
