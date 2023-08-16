@@ -2,24 +2,30 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'バリデーションのテスト' do
-    it 'emailが空の場合、バリデーションに失敗すること' do
-      user = FactoryBot.build(:user, email: nil)
-      expect(user.valid?).to eq(false)
+    context 'メールアドレスが空の場合' do
+      it 'バリデーションに失敗すること' do
+        user = FactoryBot.build(:user, email: nil)
+        expect(user.valid?).to eq(false)
+      end
     end
-    it 'passwordが空の場合、バリデーションに失敗すること' do
-      user = FactoryBot.build(:user, password: nil)
-      expect(user.valid?).to eq(false)
+    context 'パスワードが空の場合' do
+      it 'バリデーションに失敗すること' do
+        user = FactoryBot.build(:user, password: nil)
+        expect(user.valid?).to eq(false)
+      end
     end
-    it 'passwordが6文字未満の場合、バリデーションに失敗すること' do
-      user = FactoryBot.build(:user, password: '12345')
-      expect(user.valid?).to eq(false)
+    context 'パスワードが6文字未満の場合' do
+      it 'バリデーションに失敗すること' do
+        user = FactoryBot.build(:user, password: '12345')
+        expect(user.valid?).to eq(false)
+      end
     end
   end
 
   describe 'follow! メソッド' do
     it '他のユーザーをフォローできること' do
-      user = FactoryBot.create(:user)
-      other_user = FactoryBot.create(:second_user)
+      user = User.new(email: 'test@sample.com', password: 'password')
+      other_user = User.new(email: 'test2@sample.com', password: '12345')
       user.follow!(other_user)
       expect(user.following?(other_user)).to be_truthy
     end
