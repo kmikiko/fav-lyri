@@ -6,13 +6,13 @@ RSpec.describe Song, type: :model do
   describe 'バリデーションのテスト' do
     context 'タイトルが空の場合' do
       it 'バリデーションに失敗すること' do
-        song = FactoryBot.build(:song, title: '', created_at: Time.now, lyric_id: lyric.id)
+        song = FactoryBot.build(:song, title: '', lyric_id: lyric.id)
         expect(song).not_to be_valid
       end
     end
     context '1文字以上のタイトルが登録された場合' do
       it 'バリデーションに成功すること' do
-        song = Song.new(title: 'a', created_at: Time.now, lyric_id: lyric.id)
+        song = Song.new(title: 'a', lyric_id: lyric.id)
         expect(song).to be_valid
       end
     end

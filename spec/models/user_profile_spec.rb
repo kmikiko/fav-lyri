@@ -5,13 +5,13 @@ RSpec.describe Song, type: :model do
   describe 'バリデーションのテスト' do
     context '名前が空の場合' do
       it 'バリデーションに失敗すること' do
-        user_profile = UserProfile.new(name: '', created_at: Time.now, user_id: user.id)
+        user_profile = UserProfile.new(name: '', user_id: user.id)
         expect(user_profile).not_to be_valid
       end
     end
     context '1文字以上の名前が登録された場合' do
       it 'バリデーションに成功すること' do
-        user_profile = UserProfile.new(name: 'a', created_at: Time.now, user_id: user.id)
+        user_profile = UserProfile.new(name: 'a', user_id: user.id)
         expect(user_profile).to be_valid
       end
     end
