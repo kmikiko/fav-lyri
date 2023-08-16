@@ -14,10 +14,9 @@
           <% end %>
           <span class="ml-2 text-xs text-gray-500"><%= favorite.lyric.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
         </div>
-        <p>歌詞: <%= favorite.lyric.phrase %></p>
-        <p>詳細: <%= favorite.lyric.detail %></p>
-        <p>曲名: <%= favorite.lyric.song.title %></p>
-        <p>アーティスト名: <%= favorite.lyric.artist.name %></p>
+        <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= favorite.lyric.phrase %></p>
+        <p><%= favorite.lyric.detail %></p>
+        <p><%= favorite.lyric.song.title %> / <%= favorite.lyric.artist.name %></p>
         <p>
           <% favorite.lyric.feelings.each do |feeling| %>
             <span class="px-2 py-1 bg-yellow-100 rounded-full text-sm text-gray-500">
