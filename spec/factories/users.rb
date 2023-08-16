@@ -11,5 +11,10 @@ FactoryBot.define do
     admin { false }
   end
 
+  factory :admin_user, class: User do
+    sequence(:email) { |n| "#{n}2@example.com" }
+    password { 'password' }
+    admin { true }
+  end
 end
 
