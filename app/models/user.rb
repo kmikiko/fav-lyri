@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  validates :email, presence: true, length: { maximum: 255 }, uniqueness: true,
+                    format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  validates :password, length: { minimum: 6 }
+
 
   def follow!(other_user)
     active_relationships.create!(followed_id: other_user.id)
