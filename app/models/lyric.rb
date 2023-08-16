@@ -13,6 +13,8 @@ class Lyric < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
   is_impressionable counter_cache: true
+  validates :phrase, presence: true
+  validates :detail, presence: true
 
   scope :recently_created, -> { where('created_at >= ?', 1.month.ago) }
   scope :ranked, -> { order(impressions_count: :desc) }
