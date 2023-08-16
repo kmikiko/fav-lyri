@@ -14,7 +14,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         fill_in, 'user[user_profile_attributes][name]', with: 'サザエ'
         fill_in, 'user[user_profile_attributes][introduction]', with: 'サザエ'
         click_on "アカウント登録"
-        expect(page).to have_content ''
+        expect(page).to have_content 'a'
       end
     end
   
