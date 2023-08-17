@@ -15,9 +15,9 @@
             <% end %>
             <% if current_user == comment.user %>
               <div class="ml-auto space-x-2">
-                <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true, class: "text-xs", data: { turbolinks: false }  %>
+                <%= link_to "編集", edit_lyric_comment_path(lyric, comment), remote: true, class: "test_edit text-xs", data: { turbolinks: false }  %>
                 <%= link_to "削除", lyric_comment_path(comment.lyric_id, comment.id), method: :delete, remote: true,
-                                          data: { confirm: "本当に削除しますか?" }, class: "text-xs" %>
+                                          data: { confirm: "本当に削除しますか?" }, id: "test_destroy#{lyric.id}", class: "text-xs" %>
               </div>
             <% end %>
           </div>

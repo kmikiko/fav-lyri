@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'ユーザー管理機能', type: :system do
   let!(:user) { FactoryBot.create(:user,email:'katsuo@example.com') }
-  let!(:user_profile) {FactoryBot.create(:user_profile, user_id:user.id)}
+  let!(:user_profile) {FactoryBot.create(:user_profile, name: 'カツオ', user_id:user.id)}
   let!(:second_user) {FactoryBot.create(:second_user)}
   let!(:user_profile2) {FactoryBot.create(:user_profile, user_id:second_user.id)}
   let!(:admin_user) {FactoryBot.create(:admin_user)}
@@ -111,6 +111,56 @@ RSpec.describe 'ユーザー管理機能', type: :system do
       it '管理画面が表示される' do
         visit rails_admin_path
         expect(page).to have_content 'サイト管理'
+      end
+    end
+  end
+  describe 'フォロー機能' do
+    before do
+      visit new_user_session_path
+      fill_in "user[email]",with: second_user.email
+      fill_in "user[password]",with: second_user.password
+      click_button "ログイン"
+      sleep(2)
+    end
+    context '他のユーザーのユーザーページを訪れた場合' do
+      it 'フォローボタンが表示される' do
+        visit user_path(user.id)
+        sleep(1)
+        expect(page).to have_button 'follow'
+      end
+    end
+    context '他のユーザーをフォローした場合' do
+      it '自分のユーザーページを経由しフォローしたユーザーの一覧が確認できる' do
+        visit user_path(user.id)
+        sleep(1)
+        click_button 'follow'
+        visit user_path(second_user.id)
+        sleep(1)
+        click_button 'followed'
+        expect(page).to have_content'カツオ'
+      end
+    end
+    context 'フォローしたユーザーのユーザーページを訪れた場合' do
+      it 'フォロー解除ボタンが表示される' do
+        visit user_path(user.id)
+        sleep(1)
+        click_button 'follow'
+        visit user_path(user.id)
+        sleep(1)
+        expect(page).to have_button 'follow解除'
+      end
+    end
+    context '他のユーザーをフォロー解除した場合' do
+      it 'フォロー一覧から消える' do
+        visit user_path(user.id)
+        sleep(1)
+        click_button 'follow'
+        visit user_path(user.id)
+        sleep(1)
+        click_button 'follow解除'
+        visit user_path(second_user.id)
+        click_button 'followed'
+        expect(page).to_not have_content'カツオ'
       end
     end
   end

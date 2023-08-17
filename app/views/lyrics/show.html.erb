@@ -11,7 +11,7 @@
     <% end %>
     <span class="ml-2 text-xs text-gray-500"><%= @lyric.created_at.strftime("%Y-%m-%d %H:%M")  %></span>
   </div>
-  <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= @lyric.phrase %></p>
+  <p class="lyric_phrase px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= @lyric.phrase %></p>
   <p><%= @lyric.detail %></p>
   <p><%= @lyric.song.title %> / <%= @lyric.artist.name %></p>
   <p>
@@ -44,8 +44,10 @@
         <%= link_to 'お気に入り', favorites_path(lyric_id: @lyric.id), method: :post, class: 'btn btn-primary' %>
       <% end %>
     <% else %>
-      <%= link_to "編集", edit_lyric_path(@lyric.id) %>
-      <%= link_to '削除', lyric_path(@lyric.id), method: :delete, data: { confirm: '本当に編集していいですか？' } %>
+      <div id="test_edit">
+        <%= link_to "編集", edit_lyric_path(@lyric.id) %>
+      </div>
+      <%= link_to '削除', lyric_path(@lyric.id), method: :delete, id:'test_destroy', data: { confirm: '本当に編集していいですか？' } %>
     <% end %> 
 </div>  
     <%= render partial: 'comments/form', locals: { comment: @comment, lyric: @lyric } %>

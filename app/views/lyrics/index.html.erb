@@ -26,10 +26,10 @@
         <% end %>
         <span class="ml-2 text-xs text-gray-500"><%= lyric.created_at.strftime("%Y-%m-%d %H:%M") %></span>
       </div>
-      <p class="px-2 py-1 bg-gray-100 rounded-full text-sm text-gray-500"> <%= lyric.phrase %></p>
+      <p class="lyric_phrase_test px-2 py-1 bg-gray-100 rounded-full text-sm text-gray-500"> <%= lyric.phrase %></p>
       <p><%= truncate(lyric.detail, length: 10) %></p>
       <p><%= lyric.song.title %> / <%= lyric.artist.name %></p>
-      <p>
+      <p class="test_feeling">
         <% lyric.feelings.each do |feeling| %>
           <span class="px-2 py-1 bg-yellow-100 rounded-full text-sm text-gray-500">
             <%= feeling.sort %>
