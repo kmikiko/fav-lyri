@@ -19,6 +19,7 @@ RSpec.describe 'コメント機能', type: :system do
       it "コメントができない" do
         click_on 'ログアウト'
         visit lyric_path(lyric.id)
+        sleep(1)
         expect(page).to have_content 'ログインするとコメントができます'
         expect(page).to_not have_button 'Comment'
       end
@@ -36,6 +37,7 @@ RSpec.describe 'コメント機能', type: :system do
         visit lyric_path(lyric.id)
         fill_in 'comment[content]',with: '春夏秋冬'
         click_button 'Comment'
+        sleep(1)
         comment_edit_lists = all('.test_edit')
         comment_edit_lists[0].click
         fill_in "comment_content_#{lyric.id}",with: 'All Seasons'
@@ -49,6 +51,7 @@ RSpec.describe 'コメント機能', type: :system do
         visit lyric_path(lyric.id)
         fill_in 'comment[content]',with: '春夏秋冬'
         click_button 'Comment'  
+        sleep(1)
         page.accept_confirm do
           click_link("test_destroy#{lyric.id}")
         end

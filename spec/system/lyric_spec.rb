@@ -36,6 +36,7 @@ RSpec.describe '歌詞投稿機能', type: :system do
         visit lyrics_path
         lyric_lists = all('#detail_link')
         lyric_lists[0].click
+        sleep(2)
         find("#test_edit").click
         fill_in 'lyric[phrase]', with: '歌詞Change'
         fill_in 'lyric[detail]', with: '感想Change'
@@ -52,7 +53,9 @@ RSpec.describe '歌詞投稿機能', type: :system do
       it '投稿したユーザーであれば削除できる' do
         visit lyrics_path
         lyric_detail_lists = all('#detail_link')
+        sleep(1)
         lyric_detail_lists[0].click
+        sleep(3)
         page.accept_confirm do
           click_link('test_destroy')
         end

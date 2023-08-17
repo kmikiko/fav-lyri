@@ -60,6 +60,7 @@ RSpec.describe '気分ラベル付け機能', type: :system do
         visit lyrics_path
         lyric_lists = all('#detail_link')
         lyric_lists[0].click
+        sleep(1)
         find("#test_edit").click
         check '疲れた'
         click_button "投稿する"
@@ -73,10 +74,11 @@ RSpec.describe '気分ラベル付け機能', type: :system do
 
   describe '詳細表示機能' do
     context '詳細画面に遷移した場合' do
-      it 'タスクに紐づいているラベルが表示される' do
+      it '紐づいている気分ラベルが表示される' do
         visit lyrics_path
         lyric_lists = all('#detail_link')
         lyric_lists[0].click
+        sleep(1)
         expect(page).to_not have_content '嬉しい'
         expect(page).to_not have_content '疲れた'
         expect(page).to have_content '悲しい'
@@ -97,7 +99,7 @@ RSpec.describe '気分ラベル付け機能', type: :system do
       FactoryBot.create(:artist, lyric_id: lyric3.id)
     end
     context '一覧画面でラベルを選択し検索した場合' do
-      it '指定したラベルがついたタスクのみが表示される' do
+      it '指定したラベルがついた投稿のみが表示される' do
         visit lyrics_path
         select '悲しい', from: 'q[feelings_id_eq]'
         click_button "検索"
