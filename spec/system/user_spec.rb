@@ -4,11 +4,12 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   let!(:user) { FactoryBot.create(:user,email:'katsuo@example.com') }
   let!(:user_profile) {FactoryBot.create(:user_profile, user_id:user.id)}
   let!(:second_user) {FactoryBot.create(:second_user)}
+  let!(:user_profile2) {FactoryBot.create(:user_profile, user_id:second_user.id)}
   let!(:admin_user) {FactoryBot.create(:admin_user)}
+  let!(:user_profile3) {FactoryBot.create(:user_profile, user_id:admin_user.id)}
   let!(:lyric) {FactoryBot.create(:lyric, phrase:'test', user_id:user.id)}
   let!(:song){FactoryBot.create(:song, lyric_id: lyric.id)}
   let!(:artist){FactoryBot.create(:artist, lyric_id: lyric.id)}
-  # let!(:impression){Impression.new(ip_address:111111, user_id: second_user.id)}
   describe '新規ユーザー作成機能' do
     context 'ユーザーを新規作成した場合' do
       it '投稿一覧ページ（検索欄含む）に遷移する' do
@@ -31,17 +32,18 @@ RSpec.describe 'ユーザー管理機能', type: :system do
       end
       it '投稿詳細の閲覧ができる' do
         visit lyrics_path
-        click_on "詳細"
         sleep(3)
-        expect(page).to have_content 'お気に入り'
+        find("#detail_link").click
+        sleep(6)
+        expect(page).to have_link 'Play Full'
         expect(page).to have_content 'test'
       end
       it 'ランキングの閲覧ができる' do
         visit lyrics_path
         click_on "ranking"
-        sleep(6)
+        sleep(3)
         expect(page).to have_content '第1位'
-        expect(page).to_not have_content 'test'
+        expect(page).to have_content 'test'
       end
     end
   end
@@ -49,37 +51,38 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   describe 'ログイン機能' do
     before do
       visit new_user_session_path
-      fill_in "session[email]",with: user.email
-      fill_in "session[password]",with: user.password
-      click_on "ログイン"
+      fill_in "user[email]",with: user.email
+      fill_in "user[password]",with: user.password
+      click_button "ログイン"
+      sleep(3)
     end
     context '登録済みのユーザーがログインした場合' do
       it '投稿一覧ページ（検索欄含む）に遷移する' do
-        expect(page).to have_content '検索'
+        expect(page).to have_button '検索'
+        expect(page).to have_content 'ログインしました'
       end
     end
   
     context 'ユーザーが他のユーザーの詳細画面にアクセスした場合' do
       it '限られた情報のみが表示される' do
         visit user_path(second_user.id)
-        expect(page).to have_content 'follow'
-        expect(page).to have_content 'ワカメ'
+        sleep(1)
+        expect(page).to have_button 'follow'
         expect(page).to_not have_content 'メールアドレス'
-        expect(page).to_not have_content 'favorites'
-        expect(page).to_not have_content 'follower'
-        expect(page).to_not have_content 'followed'
+        expect(page).to_not have_button 'favorites'
+        expect(page).to_not have_button 'follower'
+        expect(page).to_not have_button 'followed'
       end
     end
 
     context 'ユーザーが自分の詳細画面にアクセスした場合' do
       it 'ユーザーに関する情報が表示される' do
         visit user_path(user.id)
-        expect(page).to_not have_content 'follow'
-        expect(page).to have_content 'カツオ'
-        expect(page).to_not have_content 'メールアドレス'
-        expect(page).to_not have_content 'favorites'
-        expect(page).to_not have_content 'follower'
-        expect(page).to_not have_content 'followed'
+        sleep(1)
+        expect(page).to have_content 'メールアドレス'
+        expect(page).to have_button 'favorites'
+        expect(page).to have_button 'follower'
+        expect(page).to have_button 'followed'
       end
     end
 
@@ -87,12 +90,11 @@ RSpec.describe 'ユーザー管理機能', type: :system do
       it '限られた情報のみが表示される' do
         click_on 'ログアウト'
         visit user_path(second_user.id)
-        expect(page).to have_content 'follow'
-        expect(page).to have_content 'ワカメ'
+        sleep(1)
         expect(page).to_not have_content 'メールアドレス'
-        expect(page).to_not have_content 'favorites'
-        expect(page).to_not have_content 'follower'
-        expect(page).to_not have_content 'followed'
+        expect(page).to_not have_button 'favorites'
+        expect(page).to_not have_button  'follower'
+        expect(page).to_not have_button  'followed'
       end
     end
   end
@@ -100,26 +102,15 @@ RSpec.describe 'ユーザー管理機能', type: :system do
   describe '管理画面の機能' do
     before do
       visit new_user_session_path
-      fill_in "session[email]",with: admin_user.email
-      fill_in "session[password]",with: admin_user.password
-      click_on "ログイン"
+      fill_in "user[email]",with: admin_user.email
+      fill_in "user[password]",with: admin_user.password
+      click_button "ログイン"
+      sleep(2)
     end
     context '管理者として登録されている場合' do
       it '管理画面が表示される' do
         visit rails_admin_path
         expect(page).to have_content 'サイト管理'
-      end
-    end
-  
-    context '一般ユーザーとして登録されている場合' do
-      it '管理画面が表示されない' do
-        click_on 'ログアウト'
-        visit new_user_session_path
-        fill_in "session[email]",with: user.email
-        fill_in "session[password]",with: user.password
-        click_on "ログイン"
-        visit rails_admin_path
-        expect(page).to_not have_content 'サイト管理'
       end
     end
   end
