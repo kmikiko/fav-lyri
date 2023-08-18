@@ -22,7 +22,9 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'ransack'
 gem 'rspotify'
-gem 'impressionist'
+gem 'impressionist',
+  git: 'git@github.com:charlotte-ruby/impressionist.git',
+  ref: '46a582ff8cd3496da64f174b30b91f9d97e86643'
 gem 'whenever', require: false
 gem 'net-smtp' 
 gem 'net-imap' 
