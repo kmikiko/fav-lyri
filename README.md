@@ -8,12 +8,13 @@
 * devise
 * お気に入り機能
 * フォロー機能
+* Ajaxを使ったコメント機能
 * AWS(EC2)へのデプロイ
 
 ## カリキュラム外の技術
-* Spotify WebAPIを使用した楽曲再生機能
-* Action cable を使った送信時リロードなしのコメント機能
+* Spotify WebAPI を使用した楽曲再生機能
 * ransack を使用した検索機能
+* Active Job と whenever を使用した定期ジョブ実行
 
 ## 実行手順
 
@@ -34,9 +35,7 @@ https://docs.google.com/spreadsheets/d/1rgskN4CPZRHm1_0nyAryxIcdYGyQ6PzMTHMbZoDA
 
 ## ワイヤーフレーム
 https://www.figma.com/file/vuSW4oWcpo730zwOtS08XB/Untitled?type=design&node-id=0-1&mode=design&t=W2ii61JIkdBxISu1-0
-![ワイヤーフレーム１](https://github.com/kmikiko/original_app/assets/127947837/83b4f5ef-c42d-49c1-aac3-7b8c7d51c228)
-![ワイヤーフレーム2 ](https://github.com/kmikiko/original_app/assets/127947837/6f2395c0-7371-4a1f-bad9-32e54f34f599)
-![ワイヤーフレーム3 ](https://github.com/kmikiko/original_app/assets/127947837/2c9fba2a-62da-473b-a10f-3c1239b54da6)
+
 
 
 ## 画面遷移図
