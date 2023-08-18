@@ -32,8 +32,8 @@ ja:
       comment: 'Comment'
       update: '更新する'
     favorite:
-      create: 'お気に入り'
-      destroy: 'お気に入り解除'
+      create: '♡ お気に入り'
+      destroy: '♥ お気に入り解除'
     navigation:
       login: 'ログイン'
       logout: 'ログアウト'

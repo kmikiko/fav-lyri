@@ -39,9 +39,13 @@
   <% if user_signed_in? %>
     <% unless @lyric.user_id == current_user.id %>
       <% if @favorite.present? %> 
-        <%= link_to t('view.favorite.destroy'), favorite_path(id: @favorite.id), method: :delete, class: 'btn btn-danger' %>
+        <div id="js-favorite-<%= @lyric.id %>">
+          <%= render partial: 'favorites/destroy', locals: { favorite: @favorite, lyric: @lyric } %>
+        </div>
       <% else %>
-        <%= link_to t('view.favorite.create'), favorites_path(lyric_id: @lyric.id), method: :post, class: 'btn btn-primary' %>
+        <div id="js-favorite-<%= @lyric.id %>">
+          <%= render partial: 'favorites/create', locals: { favorite: @favorite, lyric: @lyric } %>
+        </div>
       <% end %>
     <% else %>
       <div id="test_edit">

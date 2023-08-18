@@ -1,0 +1,1 @@
+<%= link_to t('view.favorite.create'), favorites_path(lyric_id: lyric.id), id: "js-favorite-#{lyric.id}", class: 'mx-auto', method: :post, remote: true, data: { turbolinks: false } %>
