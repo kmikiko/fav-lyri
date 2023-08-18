@@ -3,7 +3,7 @@
 
 <% if current_user == @user %>
   <% if current_user.email != 'guest@example.com' && current_user.email != 'guest-admin@example.com' %>
-    <%= link_to "編集", edit_user_registration_path %>
+    <%= link_to t('view.lyric.edit'), edit_user_registration_path %>
   <% end %>
 <% end %>
 
@@ -25,13 +25,13 @@
 <% if current_user == @user %>
   <p>メールアドレス: <%= @user.email %></p>
   <button class="custom-button mt-4">
-    <%= button_to "favorites", user_favorites_user_path, method: :get %>
+    <%= button_to t('view.user.favorite'), user_favorites_user_path, method: :get %>
   </button>
   <button class="custom-button mt-4">
-    <%= button_to "follower", show_followers_user_path, method: :get %>
+    <%= button_to t('view.user.follower'), show_followers_user_path, method: :get %>
   </button>
   <button class="custom-button mt-4">
-    <%= button_to "followed", show_following_user_path, method: :get %>
+    <%= button_to t('view.user.follower'), show_following_user_path, method: :get %>
   </button>
 
   <% if @following_lyrics.any? %>
@@ -55,7 +55,7 @@
               </span>
             <% end %>
           </p>
-          <p><%= link_to '詳細', lyric_path(lyric.id) %></p>
+          <p><%= link_to t('view.lyric.show'), lyric_path(lyric.id) %></p>
         </div>
       <% end %>
     </div>

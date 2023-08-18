@@ -33,26 +33,30 @@
           <%= image_tag("bell.png", class: "rounded-circle nav-icon", size: "20x20") %>
         <% end %>
       <% end %>
-      <%= link_to "About Fav-lyri", root_path %>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      <%= link_to t('view.navigation.about'), root_path %>
+      <%= link_to t('view.navigation.logout'), destroy_user_session_path, method: :delete %>
       <% if current_user.admin == true %>
-        <%= link_to "管理者画面", rails_admin_path %>
+        <%= link_to t('view.navigation.admin_page'), rails_admin_path %>
       <% end %>
     <% else %>
-      <%= link_to "About Fav-lyri", root_path %>
-      <%= link_to "ログイン", new_user_session_path %>
-      <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post %>
-      <%= link_to "管理者ゲストログイン", users_guest_admin_sign_in_path, method: :post %>
+      <%= link_to t('view.navigation.about'), root_path %>
+      <%= link_to t('view.navigation.login'), new_user_session_path %>
+      <%= link_to t('view.navigation.guest_login'), users_guest_sign_in_path, method: :post %>
+      <%= link_to t('view.navigation.guest_admin_login'), users_guest_admin_sign_in_path, method: :post %>
     <% end %>
   </header>
   <br>
-  <% if notice %>
-    <p class="alert alert-notice"><%= notice %></p>
-  <% end %>
+  <p>fav-lyri</p>
   <br>
-  <% if alert %>
-    <p class="alert alert-error"><%= alert %></p>
-  <% end %>
+  <div class="text-center">
+    <% if notice %>
+      <p class="notice bg-yellow-100 text-gray-500 px-4 py-3 mb-4 rounded-lg max-w-md inline-block"><%= notice %></p>
+    <% end %>
+    <br>
+    <% if alert %>
+      <p class="alert bg-red-100 text-red-600 px-4 py-3 mb-4 rounded-lg max-w-md inline-block"><%= alert %></p>
+    <% end %>
+  </div>
   <%= yield %>
   <footer class="footer text-xs text-gray-500">
         <p>Copyright &copy;2023 by Mikiko Kanda. All rights reserved.</p>

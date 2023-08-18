@@ -1,37 +1,52 @@
 ja:
   activerecord:
-    models:
-      user: ユーザー
-      lyric: 歌詞
-      comment: コメント
-      favorite: お気に入り
-      song: 曲
-      artist: アーティスト
-      feeling: 気分
-      user_profile: プロフィール
-      lyrics_feeling: 歌詞の気分
-      notification: 通知
-      relationship: 関係
-      impression: 印象
-    attributes: 
-      user:
-        email: メールアドレス
-        password: パスワード
-      lyric:
-        phrase: お気に入りの歌詞
-        detail: 歌詞の解釈やエピソード
-      comment:
-        content: 内容
-      song:
-        title: タイトル        
-      artist:
-        name: 名前
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+  view:
+    error:
+      error_count: '件のエラーがあります。'
+    place_holder:
+      phrase: 'お気に入りの歌詞を20文字以内で入力してください'
+      detail: '歌詞についての感想・解釈を入力してください'
+      song_title: '曲名を正しく入力してください'
+      artist_name: 'アーティスト名を正しく入力してください'
+      phrase_search: '歌詞'
+      song_search: '曲名'
+      artist_search: 'アーティスト名'
+      feeling_search: 'どんな気分？'
+    lyric:
+      create: '投稿する'
+      new: '新規投稿'
+      show: '詳細'
+      edit: '編集'
+      destroy: '削除'
+      back: '投稿一覧にもどる'
+      search: '検索'
+      ranking: 'ranking'
+      login_required: 'ログインするとコメントができます！'
+      destroy_confirm: '本当に削除していいですか？'
+      comment: 'Comment'
+      update: '更新する'
+    favorite:
+      create: 'お気に入り'
+      destroy: 'お気に入り解除'
+    navigation:
+      login: 'ログイン'
+      logout: 'ログアウト'
+      guest_login: 'ゲストログイン'
+      guest_admin_login: '管理者ゲストログイン'
+      admin_page: '管理者画面'
+      about: 'About'
+    user:
+      follow: 'follow'
+      unfollow: 'follow解除'
+      favorite: 'favorites'
+      follower: 'follower'
+      followed: 'followed'
   date:
     abbr_day_names:
     - 日

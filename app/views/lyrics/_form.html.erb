@@ -2,10 +2,10 @@
   <br>
   <% if @lyric.errors.any? %>
     <div id="error_explanation" class="bg-red-100 text-red-600 px-4 py-3 mb-4 rounded-lg">
-      <h2><%= @lyric.errors.count %>件のエラーがあります。</h2>
+      <h2><%= @lyric.errors.count %> 件のエラーがあります。</h2>
       <ul>
-        <% @lyric.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
+        <% @lyric.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -13,22 +13,22 @@
   <br>
   <div class="lyric_phrase mb-4">
     <%= f.label :phrase, class: "block font-bold" %>
-    <%= f.text_field :phrase, placeholder: "お気に入りの歌詞を20文字以内で入力してください", class: "block w-full border rounded-lg px-4 py-2" %>
+    <%= f.text_field :phrase, placeholder: t('view.place_holder.phrase'), class: "block w-full border rounded-lg px-4 py-2" %>
   </div>
   <div class="lyric_detail mb-4">
     <%= f.label :detail, class: "block font-bold" %>
-    <%= f.text_field :detail, placeholder: "歌詞についての感想・解釈を入力してください", class: "block w-full border rounded-lg px-4 py-2" %>
+    <%= f.text_field :detail, placeholder: t('view.place_holder.detail'), class: "block w-full border rounded-lg px-4 py-2" %>
   </div>
   <div class="song_title mb-4">
     <%= f.fields_for :song do |s| %>
-      <%= s.label :title, "曲名", class: "block font-bold" %>
-      <%= s.text_field :title, placeholder: "曲名を正しく入力してください", class: "block w-full border rounded-lg px-4 py-2" %>
+      <%= s.label :title, class: "block font-bold" %>
+      <%= s.text_field :title, placeholder: t('view.place_holder.song_title'), class: "block w-full border rounded-lg px-4 py-2" %>
     <% end %>
   </div>
   <div class="artist_name mb-4">
     <%= f.fields_for :artist do |a| %>
-      <%= a.label :name, "アーティスト名", class: "block font-bold" %>
-      <%= a.text_field :name, placeholder: "アーティスト名を正しく入力してください", class: "block w-full border rounded-lg px-4 py-2" %>
+      <%= a.label :name, class: "block font-bold" %>
+      <%= a.text_field :name, placeholder: t('view.place_holder.artist_name'), class: "block w-full border rounded-lg px-4 py-2" %>
     <% end %>
   </div>
   <div class="feeling_sort mb-4">
@@ -41,9 +41,10 @@
   </div>
   <div class="mb-4">
     <button class="custom-button mt-4">
-      <%= f.submit "投稿する" %>
+      <%= f.submit t('view.lyric.create') %>
     </button>
   </div>
 <% end %>
 
-<%= link_to "投稿一覧にもどる", lyrics_path, class: "block mt-4 text-blue-500 hover:underline" %>
+<%= link_to t('view.lyric.back'), lyrics_path, class: "block mt-4 text-blue-500 hover:underline" %>
+<br>

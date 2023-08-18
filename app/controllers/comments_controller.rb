@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
         @lyric.create_notification_comment!(current_user, @comment.id)
         format.js { render :index }
       else
-        format.html { redirect_to lyric_path(@lyric), notice: '投稿できませんでした' }
+        format.html { redirect_to lyric_path(@lyric), notice: 'コメントするには1文字以上入力してください' }
       end
     end
   end

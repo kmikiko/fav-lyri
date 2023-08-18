@@ -1,0 +1,37 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      lyric: 歌詞
+      comment: コメント
+      favorite: お気に入り
+      song: 曲
+      artist: アーティスト
+      feeling: 気分
+      user_profile: プロフィール
+      lyrics_feeling: 歌詞の気分
+      notification: 通知
+      relationship: 関係
+      impression: 印象
+    attributes: 
+      user:
+        email: メールアドレス
+        password: パスワード
+      user_profile: 
+        name: 名前
+        icon: アイコン
+        introduction: 自己紹介
+      lyric:
+        phrase: お気に入りの歌詞
+        detail: 歌詞の解釈やエピソード
+      comment:
+        content: 内容
+      song:
+        title: 曲名        
+      artist:
+        name: アーティスト名
+      feeling:
+        sort: 種類
+      notification:
+        action: アクション
+        checked: 確認
