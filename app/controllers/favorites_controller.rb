@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
   before_action :set_lyric, only: %i[create destroy index]
   def index
     @favorites = @lyric.favorites
-    @favorite_count = Favorite.where(lyric_id: @lyric.map(&:id)).group(:lyric_id).count
+    @favorite_count = @favorites.where(lyric_id: @lyric.map(&:id)).group(:lyric_id).count
   end
   
   def create
