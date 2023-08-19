@@ -54,6 +54,7 @@ class LyricsController < ApplicationController
       url = track.preview_url
       @tracks << { lyric: @lyric, url: url, track: track }
     end
+    @favorite_count = Favorite.where(lyric_id: @lyric.id).group(:lyric_id).count
   end
 
   def destroy
@@ -83,6 +84,6 @@ class LyricsController < ApplicationController
   end
 
   def set_lyric
-    @lyric = Lyric.find(params[:id])
+    @lyric = Lyric.includes(:favorites, :comments, :song, :artist).find(params[:id])
   end
 end

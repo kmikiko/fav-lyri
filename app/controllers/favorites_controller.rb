@@ -9,10 +9,12 @@ class FavoritesController < ApplicationController
   def create
     @favorite = current_user.favorites.create(lyric_id: params[:lyric_id])
     @lyric.create_notification_favorite!(current_user)
+    @favorite_count = @favorite_count = Favorite.where(lyric_id: @lyric.id).group(:lyric_id).count
   end
 
   def destroy
     @favorite = current_user.favorites.find_by(id: params[:id]).destroy
+    @favorite_count = @favorite_count = Favorite.where(lyric_id: @lyric.id).group(:lyric_id).count
   end
 
   private

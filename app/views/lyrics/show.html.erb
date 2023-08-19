@@ -37,20 +37,23 @@
   <br>
   <% if user_signed_in? %>
     <% unless @lyric.user_id == current_user.id %>
-      <% if @favorite.present? %> 
+      <% if @favorite.present? %>
         <div id="js-favorite-<%= @lyric.id %>">
-          <%= render partial: 'favorites/destroy', locals: { favorite: @favorite, lyric: @lyric } %>
+          <%= render partial: 'favorites/destroy', locals: { favorite: @favorite, lyric: @lyric, favorite_count: @favorite_count } %>
         </div>
       <% else %>
         <div id="js-favorite-<%= @lyric.id %>">
-          <%= render partial: 'favorites/create', locals: { favorite: @favorite, lyric: @lyric } %>
+          <%= render partial: 'favorites/create', locals: { favorite: @favorite, lyric: @lyric, favorite_count: @favorite_count } %>
         </div>
       <% end %>
     <% else %>
-      <div id="test_edit">
-        <%= link_to t('view.lyric.edit'), edit_lyric_path(@lyric.id) %>
+      <div class="flex space-x-4 items-center justify-center">
+        <div id="test_edit">
+          <span><%= link_to t('view.lyric.edit'), edit_lyric_path(@lyric.id) %></span>
+        </div>
+        <span><%= link_to t('view.lyric.destroy'), lyric_path(@lyric.id), method: :delete, id:'test_destroy', data: { confirm: t('view.lyric.destroy_confirm') } %></span>
+        <span class="text-xs text-gray-400"><%= @favorite_count[@lyric.id] || 0 %>♡</span>
       </div>
-      <%= link_to t('view.lyric.destroy'), lyric_path(@lyric.id), method: :delete, id:'test_destroy', data: { confirm: t('view.lyric.destroy_confirm') } %>
     <% end %> 
 </div>  
     <%= render partial: 'comments/form', locals: { comment: @comment, lyric: @lyric } %>

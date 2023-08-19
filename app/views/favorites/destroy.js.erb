@@ -1,1 +1,1 @@
-$("#js-favorite-<%= @lyric.id %>").replaceWith("<%= j render 'favorites/create', favorite: @favorite, lyric: @lyric %>");
+$("#js-favorite-<%= @lyric.id %>").replaceWith("<%= j render 'favorites/create', favorite: @favorite, lyric: @lyric, favorite_count: @favorite_count %>");
