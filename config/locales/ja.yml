@@ -38,7 +38,7 @@ ja:
       login: 'ログイン'
       logout: 'ログアウト'
       guest_login: 'ゲストログイン'
-      guest_admin_login: '管理者ゲストログイン'
+      guest_admin_login: '管理者ゲストログイン'   
       admin_page: '管理者画面'
       about: 'About'
     user:

@@ -1,5 +1,5 @@
 <div class="container mx-auto py-8">
-  <h1 class="text-2xl font-bold mb-4">お気に入り一覧</h1>
+  <h2 class="text-2xl mb-4">お気に入り一覧</h2>
   <% if @favorites.any? %>
     <% @favorites.each do |favorite| %>
       <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-4 p-4">
@@ -12,14 +12,14 @@
             <% end %>
             <p class="ml-2"><%= favorite.lyric.user.user_profile.name %></p>
           <% end %>
-          <span class="ml-2 text-xs text-gray-500"><%= favorite.lyric.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+          <span class="ml-2 text-xs text-gray-500"><%= favorite.lyric.created_at.strftime("%Y-%m-%d %H:%M") %></span>
         </div>
         <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= favorite.lyric.phrase %></p>
         <p><%= favorite.lyric.detail %></p>
         <p><%= favorite.lyric.song.title %> / <%= favorite.lyric.artist.name %></p>
         <p>
           <% favorite.lyric.feelings.each do |feeling| %>
-            <span class="px-2 py-1 bg-yellow-100 rounded-full text-sm text-gray-500">
+            <span class="tag-pink px-2 py-1 rounded-full text-sm text-gray-500">
               <%= feeling.sort %>
             </span>
           <% end %>

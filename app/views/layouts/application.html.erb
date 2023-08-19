@@ -14,7 +14,7 @@
 
   <body>
   <header>
-    <%= link_to image_tag("logo.png", class: "rounded-circle", size: "50x50"), lyrics_path %>
+    <%= link_to image_tag("logo-fav-lyri.png", class: "rounded-circle", size: "70x70"), lyrics_path %>
     <% if user_signed_in? %>
       <%= link_to user_path(current_user.id) do %>
         <% if current_user.user_profile.icon && current_user.user_profile.icon.url %>
@@ -59,7 +59,8 @@
   </div>
   <%= yield %>
   <footer class="footer text-xs text-gray-500">
-        <p>Copyright &copy;2023 by Mikiko Kanda. All rights reserved.</p>
+    <br>
+    <p>Copyright &copy;2023 by Mikiko Kanda. All rights reserved.</p>
   </footer>
 </body>
 </html>

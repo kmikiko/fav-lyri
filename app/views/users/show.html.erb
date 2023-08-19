@@ -50,7 +50,7 @@
           <p><%= "#{lyric.song.title} / #{lyric.artist.name}" %></p>
           <p>
             <% lyric.feelings.each do |feeling| %>
-              <span class="px-2 py-1 bg-yellow-100 rounded-full text-sm text-gray-500">
+              <span class="tag-pink px-2 py-1 rounded-full text-sm text-gray-500">
                 <%= feeling.sort %>
               </span>
             <% end %>
