@@ -105,15 +105,15 @@
 <% unless user_signed_in? %>
   <div class="flex justify-center space-x-4 mt-4 mb-16">
     <button class="custom-button">
-      <%= button_to t('view.navigation.login'), new_user_session_path, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= button_to t('view.navigation.login'), new_user_session_path, class: "px-8 py-3 text-white font-semibold shadow-md" %>
     </button>
 
     <button class="custom-button">
-      <%= button_to t('view.navigation.guest_login'), users_guest_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= button_to t('view.navigation.guest_login'), users_guest_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md" %>
     </button>
 
     <button class="custom-button">
-      <%= button_to t('view.navigation.guest_admin_login'), users_guest_admin_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" %>
+      <%= button_to t('view.navigation.guest_admin_login'), users_guest_admin_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md" %>
     </button>
   </div>
 <% end %>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/lyrics/ranking', to: 'lyrics#ranking'
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
     resources :comments, only: [:create, :destroy, :edit, :update]
+    resources :favorites, only: [:index]
   end
 
   resources :users, only: [:show] do

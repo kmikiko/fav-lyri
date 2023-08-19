@@ -9,6 +9,7 @@ class LyricsController < ApplicationController
     @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
     @feelings = Feeling.all
     @lyrics = @q.result.includes(:artist, :song, :feelings, :lyrics_feelings).order(created_at: :desc)
+    @favorite_count = Favorite.where(lyric_id: @lyrics.map(&:id)).group(:lyric_id).count
   end
 
   def new
