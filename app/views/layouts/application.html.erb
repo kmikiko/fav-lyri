@@ -45,12 +45,9 @@
       <%= link_to t('view.navigation.guest_admin_login'), users_guest_admin_sign_in_path, method: :post %>
     <% end %>
   </header>
-  <br>
-  <p>fav-lyri</p>
-  <br>
-  <div class="text-center">
+  <div class="text-center pt-20 mt-10">
     <% if notice %>
-      <p class="notice bg-yellow-100 text-gray-500 px-4 py-3 mb-4 rounded-lg max-w-md inline-block"><%= notice %></p>
+      <p class="notice tag-pink text-gray-500 px-4 py-3 mb-4 rounded-lg max-w-md inline-block"><%= notice %></p>
     <% end %>
     <br>
     <% if alert %>
@@ -58,8 +55,7 @@
     <% end %>
   </div>
   <%= yield %>
-  <footer class="footer text-xs text-gray-500">
-    <br>
+  <footer class="footer text-xs text-gray-500 mt-10">
     <p>Copyright &copy;2023 by Mikiko Kanda. All rights reserved.</p>
   </footer>
 </body>

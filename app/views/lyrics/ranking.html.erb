@@ -17,15 +17,15 @@
           <% end %>
         </div>
         <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= "#{t.phrase}" %></p>
-        <p><%= "#{truncate(t.detail, length: 10)}" %></p>
+        <p class="mt-4"><%= "#{truncate(t.detail, length: 10)}" %></p>
         <p><%= "#{t.song.title}  /  #{t.artist.name}" %></p>
-        <p>
+        <p class="mt-4">
           <%= "#{t.impressions_count} Views" %>
           <%= link_to "Comments(#{@lyric_comments_count[t.id] || 0})", lyric_path(t.id) %>
         </p>
         <br>
         <% track = @tracks.find { |t_for_track| t_for_track[:lyric] == t } %>
-        <div class="flex items-center justify-center">
+        <div class="flex items-center justify-center mb-4">
         <% if track && track[:url] %>
           <audio id='player_<%= n %>' src='<%= track[:url] %>' controls class="mr-4"></audio>
           <p class="ml-2"><%= link_to 'Play Full', track[:track].external_urls['spotify'], target: '_blank' %></p>
