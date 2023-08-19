@@ -4,6 +4,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id]) 
     following_users = @user.following + [@user]
     @following_lyrics = Lyric.where(user_id: following_users).order(created_at: :desc)
+    @lyric_ids = @following_lyrics.pluck(:id)
+    @favorite_count = Favorite.where(lyric_id: @lyric_ids).group(:lyric_id).count
   end
 
   def show_favorites

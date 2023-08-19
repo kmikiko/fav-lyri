@@ -52,7 +52,9 @@
           <span><%= link_to t('view.lyric.edit'), edit_lyric_path(@lyric.id) %></span>
         </div>
         <span><%= link_to t('view.lyric.destroy'), lyric_path(@lyric.id), method: :delete, id:'test_destroy', data: { confirm: t('view.lyric.destroy_confirm') } %></span>
-        <span class="text-xs text-gray-400"><%= @favorite_count[@lyric.id] || 0 %>♡</span>
+        <%= link_to lyric_favorites_path(lyric_id: @lyric.id) do %>
+          <span class="text-xs text-gray-400"><%= @favorite_count[@lyric.id] || 0 %>♡</span>
+        <% end %>
       </div>
     <% end %> 
 </div>  
