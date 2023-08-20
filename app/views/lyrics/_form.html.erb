@@ -9,40 +9,41 @@
       </ul>
     </div>
   <% end %>
-  <div class="lyric_phrase mb-4">
-    <%= f.label :phrase, class: "block font-bold" %>
-    <%= f.text_field :phrase, placeholder: t('view.place_holder.phrase'), class: "block w-full border rounded-lg px-4 py-2" %>
-  </div>
-  <div class="lyric_detail mb-4">
-    <%= f.label :detail, class: "block font-bold" %>
-    <%= f.text_field :detail, placeholder: t('view.place_holder.detail'), class: "block w-full border rounded-lg px-4 py-2" %>
-  </div>
-  <div class="song_title mb-4">
-    <%= f.fields_for :song do |s| %>
-      <%= s.label :title, class: "block font-bold" %>
-      <%= s.text_field :title, placeholder: t('view.place_holder.song_title'), class: "block w-full border rounded-lg px-4 py-2" %>
-    <% end %>
-  </div>
-  <div class="artist_name mb-4">
-    <%= f.fields_for :artist do |a| %>
-      <%= a.label :name, class: "block font-bold" %>
-      <%= a.text_field :name, placeholder: t('view.place_holder.artist_name'), class: "block w-full border rounded-lg px-4 py-2" %>
-    <% end %>
-  </div>
-  <div class="feeling_sort mb-4">
-    <% Feeling.all.each do |feeling| %>
-      <label class="block items-center">
-        <%= f.check_box :feeling_ids, { multiple: true, checked: @lyric.feeling_ids.include?(feeling.id), disabled: feeling[:disabled], include_hidden: false }, feeling[:id], class: "form-checkbox" %>
-        <%= feeling.sort %>
-      </label>
-    <% end %>
-  </div>
-  <div class="mb-4">
-    <button class="custom-button mt-4">
-      <%= f.submit t('view.lyric.create') %>
-    </button>
-  </div>
-<% end %>
+  <div class="text-gray-600">
+    <div class="lyric_phrase mb-4">
+      <%= f.label :phrase, class: "block " %>
+      <%= f.text_field :phrase, placeholder: t('view.place_holder.phrase'), class: "block w-full border rounded-lg px-4 py-2" %>
+    </div>
+    <div class="lyric_detail mb-4">
+      <%= f.label :detail, class: "block" %>
+      <%= f.text_field :detail, placeholder: t('view.place_holder.detail'), class: "block w-full border rounded-lg px-4 py-2" %>
+    </div>
+    <div class="song_title mb-4">
+      <%= f.fields_for :song do |s| %>
+        <%= s.label :title, class: "block" %>
+        <%= s.text_field :title, placeholder: t('view.place_holder.song_title'), class: "block w-full border rounded-lg px-4 py-2" %>
+      <% end %>
+    </div>
+    <div class="artist_name mb-4">
+      <%= f.fields_for :artist do |a| %>
+        <%= a.label :name, class: "block" %>
+        <%= a.text_field :name, placeholder: t('view.place_holder.artist_name'), class: "block w-full border rounded-lg px-4 py-2" %>
+      <% end %>
+    </div>
+    <div class="feeling_sort mb-4">
+      <% Feeling.all.each do |feeling| %>
+        <label class="block items-center">
+          <%= f.check_box :feeling_ids, { multiple: true, checked: @lyric.feeling_ids.include?(feeling.id), disabled: feeling[:disabled], include_hidden: false }, feeling[:id], class: "form-checkbox" %>
+          <%= feeling.sort %>
+        </label>
+      <% end %>
+    </div>
+    <div class="mb-4">
+      <button class="custom-button mt-4">
+        <%= f.submit t('view.lyric.create') %>
+      </button>
+    </div>
+  <% end %>
+</div>
 
 <%= link_to t('view.lyric.back'), lyrics_path, class: "block mt-4 text-blue-500 hover:underline" %>
-<br>
