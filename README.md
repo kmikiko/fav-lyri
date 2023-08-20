@@ -29,18 +29,18 @@ $ rails db:seed
 $ rails s
 ```  
 
-## カタログ設計, テーブル設計
-https://docs.google.com/spreadsheets/d/1rgskN4CPZRHm1_0nyAryxIcdYGyQ6PzMTHMbZoDAzsw/edit?hl=JA#gid=2017131208
+## カタログ設計, テーブル設計, ワイヤーフレーム
+[カタログ設計](https://docs.google.com/spreadsheets/d/1rgskN4CPZRHm1_0nyAryxIcdYGyQ6PzMTHMbZoDAzsw/edit?hl=JA#gid=2017131208) 
 
+[テーブル設計](https://docs.google.com/spreadsheets/d/1rgskN4CPZRHm1_0nyAryxIcdYGyQ6PzMTHMbZoDAzsw/edit?hl=JA#gid=496992112)
 
-## ワイヤーフレーム
-https://www.figma.com/file/vuSW4oWcpo730zwOtS08XB/Untitled?type=design&node-id=0-1&mode=design&t=W2ii61JIkdBxISu1-0
+[ワイヤーフレーム](https://www.figma.com/file/vuSW4oWcpo730zwOtS08XB/Untitled?type=design&node-id=0-1&mode=design&t=W2ii61JIkdBxISu1-0)
+
 
 
 
 ## 画面遷移図
-![original_app画面遷移 drawio ](https://github.com/kmikiko/original_app/assets/127947837/f7acd392-22d1-4a3a-b30f-b1eead0a8599)
-
+![original_app画面遷移 drawio ](original_app_er-%E3%83%98%E3%82%9A%E3%83%BC%E3%82%B7%E3%82%992.drawio.png)
 
 ## ER図　
 ![original_app_er drawio ](https://github.com/kmikiko/original_app/assets/127947837/1018875e-d37e-4095-ab75-490db610a0a1)
