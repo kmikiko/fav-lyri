@@ -40,7 +40,7 @@ $ rails s
 
 
 ## 画面遷移図
-![original_app画面遷移 drawio ](original_app_er-%E3%83%98%E3%82%9A%E3%83%BC%E3%82%B7%E3%82%992.drawio.png)
+![original_app_er-ページ2 drawio](https://github.com/kmikiko/fav-lyri/assets/127947837/e677eb0c-9d8b-4ca4-97af-9c2d6a1cdc7f)
 
 ## ER図　
 ![original_app_er drawio ](https://github.com/kmikiko/original_app/assets/127947837/1018875e-d37e-4095-ab75-490db610a0a1)
