@@ -2,8 +2,8 @@ class LyricsController < ApplicationController
   require 'rspotify'
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_ID'])
 
-  before_action :authenticate_user!, only: [:new, :create]
-  before_action :set_lyric, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: %i[ new create]
+  before_action :set_lyric, only: %i[ show edit update destroy explain]
   
   def index
     @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
@@ -75,6 +75,29 @@ class LyricsController < ApplicationController
         @tracks << { lyric: rank_lyric, url: url, track: track }
       end
     end
+  end
+
+  require "openai"
+
+  def explain
+    @phrase = @lyric.phrase
+    @song = @lyric.song.title
+    @artist = @lyric.artist.name
+
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
+    response = client.chat(
+        parameters: {
+          model: "gpt-3.5-turbo",
+          messages: [
+            { role: "system", content: "回答には、『この曲にはいくつかの興味深い裏話やエピソードがあります。』という文章を含めないでください。" },
+            { role: "system", content: "もし、「#{@artist}」の「#{@song}」や「#{@title}」といった楽曲や歌詞についての情報があなたのデータベースには含まれていない場合は、『歌詞についての説明が作成できませんでした』とだけ答え、その他に余計な文章を答えないでください。" },
+            { role: "system", content: "回答には、『他に何か別の質問やトピックについてお知りになりたいことがあれば、どうぞお知らせください。』のような、次の質問を促すような文言は含めないでください。" },
+            { role: "user", content: "#{@artist}の#{@song}という曲について、#{@title}という歌詞があります。その歌詞にまつわる興味深い裏話やエピソードを教えてください。" },
+          ],
+        },
+      )
+
+    @result = response.dig("choices", 0, "message", "content")
   end
 
   private
