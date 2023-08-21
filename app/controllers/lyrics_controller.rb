@@ -90,7 +90,7 @@ class LyricsController < ApplicationController
           model: "gpt-3.5-turbo",
           messages: [
             { role: "system", content: "曲名と歌手名とその曲に含まれる歌詞を伝えるので、その歌詞に込められた意図を推察して教えてください。" },
-            { role: "system", content: "200字以内で回答してください。"},
+            { role: "system", content: "300字以内で回答してください。"},
             { role: "system", content: "回答には、『他に何か別の質問やトピックについてお知りになりたいことがあれば、どうぞお知らせください。』のような、次の質問を促すような文言は含めないでください。" },
             { role: "system", content: "「データベースには含まれておりません」という回答は不要です。" },
             { role: "system", content: "「この歌詞の解釈は、個人によって異なるかもしれません」という回答は不要です。" },
