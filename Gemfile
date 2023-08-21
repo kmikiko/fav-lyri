@@ -28,7 +28,6 @@ gem 'net-smtp'
 gem 'net-imap' 
 gem 'net-pop'
 gem 'unicorn'
-gem 'spring'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
