@@ -11,8 +11,8 @@
     <span class="ml-2 text-xs text-gray-500"><%= @lyric.created_at.strftime("%Y-%m-%d %H:%M")  %></span>
   </div>
   <p class="lyric_phrase px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= @lyric.phrase %></p>
-  <p class="mt-4"><%= @lyric.detail %></p>
-  <p><%= @lyric.song.title %> / <%= @lyric.artist.name %></p>
+  <p class="ml-2 mr-2 mt-4 text-gray-600"><%= @lyric.detail %></p>
+  <p class="ml-2 mr-2 mt-2 text-gray-600"><%= @lyric.song.title %> / <%= @lyric.artist.name %></p>
   <p class="mt-4 mb-4">
   <% @lyric.feelings.each do |feeling| %>
     <span class="tag-pink px-2 py-1 rounded-full text-sm text-gray-500">

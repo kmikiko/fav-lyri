@@ -17,8 +17,8 @@
           <% end %>
         </div>
         <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= "#{t.phrase}" %></p>
-        <p class="mt-4"><%= "#{truncate(t.detail, length: 10)}" %></p>
-        <p><%= "#{t.song.title}  /  #{t.artist.name}" %></p>
+        <p class="ml-2 mr-2 mt-4"><%= "#{truncate(t.detail, length: 10)}" %></p>
+        <p class="ml-2 mr-2 mt-2"><%= "#{t.song.title}  /  #{t.artist.name}" %></p>
         <p class="mt-4">
           <%= "#{t.impressions_count} Views" %>
           <%= link_to "Comments(#{@lyric_comments_count[t.id] || 0})", lyric_path(t.id) %>

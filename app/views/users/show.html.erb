@@ -1,4 +1,4 @@
-<p>User Page</p>
+<p class="text-gray-600">User Page</p>
 
 <% if current_user == @user %>
   <% if current_user.email != 'guest@example.com' && current_user.email != 'guest-admin@example.com' %>
@@ -14,15 +14,15 @@
   <% end %>
 </div>
 
-<p><%= @user.user_profile.name %></p>
-<p><%= @user.user_profile.introduction %></p>
+<p class="mt-4 text-gray-600"><%= @user.user_profile.name %></p>
+<p class="mt-4 ml-2 mr-2 text-gray-600"><%= @user.user_profile.introduction %></p>
 
 <% if user_signed_in? && current_user != @user %>
   <%= render 'follow_form', user: @user %>
 <% end %>
 
 <% if current_user == @user %>
-  <p>メールアドレス: <%= @user.email %></p>
+  <p class="mt-4 text-gray-600">メールアドレス: <%= @user.email %></p>
   <button class="custom-button mt-4">
     <%= button_to t('view.user.favorite'), user_favorites_user_path, method: :get %>
   </button>
@@ -45,8 +45,8 @@
             <span class="ml-2 text-xs text-gray-500"><%= lyric.created_at.strftime("%Y-%m-%d %H:%M")  %></span>
           </div>
           <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= lyric.phrase %></p>
-          <p class="mt-4"><%= lyric.detail %></p>
-          <p><%= "#{lyric.song.title} / #{lyric.artist.name}" %></p>
+          <p class="mt-4 mr-2 ml-2 text-gray-600"><%= lyric.detail %></p>
+          <p class="mr-2 ml-2 mt-2 text-gray-600"><%= "#{lyric.song.title} / #{lyric.artist.name}" %></p>
           <p class="mt-4 mb-4">
             <% lyric.feelings.each do |feeling| %>
               <span class="tag-pink px-2 py-1 rounded-full text-sm text-gray-500">

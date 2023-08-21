@@ -1,5 +1,5 @@
 <div class="container mx-auto py-8">
-  <h2 class="text-2xl mb-4"><%= @user.user_profile.name %>がフォローしている<br>ユーザー一覧</h2>
+  <h2 class="text-2xl mb-4 text-gray-600"><%= @user.user_profile.name %>がフォローしている<br>ユーザー一覧</h2>
 
   <% if @following.any? %>
     <div class="grid grid-cols-1 gap-4">
