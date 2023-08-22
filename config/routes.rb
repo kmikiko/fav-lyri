@@ -13,9 +13,9 @@ Rails.application.routes.draw do
   resources :lyrics, only: [:index, :new, :create, :edit, :update, :destroy, :show] do
     resources :comments, only: [:create, :destroy, :edit, :update]
     resources :favorites, only: [:index]
-    member do
-      get :explain
-    end
+    # member do
+    #   get :explain
+    # end
   end
 
   resources :users, only: [:show] do
