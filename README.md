@@ -1,4 +1,7 @@
 # README
+歌詞の感想・解釈を共有するアプリ『ファブリリ』
+
+https://fav-lyri.com/
 
 ## 開発言語
 * Ruby 3.0.1
@@ -8,13 +11,14 @@
 * devise
 * Ajaxを使ったお気に入り機能
 * Ajaxを使ったコメント機能
-* フォロー機能
+* Ajaxを使ったフォロー機能
 * AWS(EC2)へのデプロイ
 
 ## カリキュラム外の技術
-* Spotify WebAPI を使用した楽曲再生機能
 * ransack を使用した検索機能
 * Active Job と whenever を使用した定期ジョブ実行
+* Spotify WebAPI (rspotify) を使用した楽曲再生機能
+* OpenAI API (ruby-openai) を使用した歌詞解説機能
 
 ## 実行手順
 
@@ -37,6 +41,8 @@ $ rails s
 [ワイヤーフレーム](https://www.figma.com/file/vuSW4oWcpo730zwOtS08XB/Untitled?type=design&node-id=0-1&mode=design&t=W2ii61JIkdBxISu1-0)
 
 
+## インフラ構成図
+![インフラ構成図](https://github.com/kmikiko/fav-lyri/assets/127947837/3be1c5d2-233e-4db9-9b42-6955d09f1b64)
 
 
 ## 画面遷移図
