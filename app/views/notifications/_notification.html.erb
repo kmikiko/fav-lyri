@@ -1,0 +1,60 @@
+<div class="grid grid-cols-1 gap-4">
+  <% visitor = notification.visitor %>
+  <% visited = notification.visited %>
+
+  <div class="col-md-6 mx-auto">
+    <div class="bg-white shadow-md rounded-lg p-4 max-w-lg">
+      <div class="flex items-center mb-2">
+        <div class="mr-2">
+          <%= link_to user_path(visitor) do %>
+            <% if visitor.user_profile.icon && visitor.user_profile.icon.url %>
+              <%= image_tag(visitor.user_profile.icon.url, class: "rounded-full w-8 h-8") %>
+            <% else %>
+              <%= image_tag("default.png", class: "rounded-full w-8 h-8") %>
+            <% end %>
+          <% end %>
+        </div>
+        <div>
+          <strong id="test_name"><%= visitor.user_profile.name %></strong> さんが
+        </div>
+      </div>
+
+      <% case notification.action %>
+      <% when 'follow' then %>
+        <div class="mt-2" id="follow_test">
+          あなたをフォローしました
+        </div>
+      <% when 'like' then %>
+        <div class="mt-2" id="favorite_test">
+          <%= link_to 'あなたの投稿', notification.lyric, class: "font-bold" %> をお気に入りしました
+        </div>
+      <% when 'comment' then %>
+        <div class="mt-2" id="comment_test">
+          <% if notification.lyric.user_id == visited.id %>
+            <%= link_to "あなたの投稿", notification.lyric, class: "font-bold" %>
+          <% else %>
+            <span>
+              <%= link_to lyric_path(notification.lyric) do %>
+                <% if notification.lyric.user.user_profile.icon && notification.lyric.user.user_profile.icon.url %>
+                  <%= image_tag(notification.lyric.user.user_profile.icon.url, class: "rounded-full w-8 h-8") %>
+                <% else %>
+                  <%= image_tag("default.png", class: "rounded-full w-8 h-8") %>
+                <% end %>
+                <strong><%= notification.lyric.user.user_profile.name %> さんの投稿</strong>
+              <% end %>
+            </span>
+          <% end %>
+          にコメントしました
+          <p class="text-muted mb-0">
+            <%= Comment.find_by(id: notification.comment_id)&.content %>
+          </p>
+        </div>
+      <% end %>
+
+      <div class="text-sm text-gray-500 mt-2">
+        <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %>
+      </div>
+    </div>
+    <br>
+  </div>
+</div>

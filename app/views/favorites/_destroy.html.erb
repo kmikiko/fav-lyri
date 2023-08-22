@@ -1,0 +1,1 @@
+<%= link_to "#{favorite_count[lyric.id] || 0}#{t('view.favorite.destroy')}", favorite_path(id: favorite.id, lyric_id: lyric.id), id: "js-favorite-#{lyric.id}", class: 'mx-auto', method: :delete, remote: true, data: { turbolinks: false } %>

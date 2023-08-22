@@ -1,0 +1,91 @@
+<p class="text-gray-600">User Page</p>
+
+<% if current_user == @user %>
+  <% if current_user.email != 'guest@example.com' && current_user.email != 'guest-admin@example.com' %>
+    <%= link_to t('view.lyric.edit'), edit_user_registration_path %>
+  <% end %>
+<% end %>
+
+<div class="mt-4 flex justify-center">
+  <% if @user.user_profile.icon && @user.user_profile.icon.url %>
+    <%= image_tag(@user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
+  <% else %>
+    <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
+  <% end %>
+</div>
+
+<p class="mt-4 text-gray-600"><%= @user.user_profile.name %></p>
+<p class="mt-4 ml-2 mr-2 text-gray-600"><%= @user.user_profile.introduction %></p>
+
+<% if user_signed_in? && current_user != @user %>
+  <%= render 'follow_form', user: @user %>
+<% end %>
+
+<% if current_user == @user %>
+  <p class="mt-4 text-gray-600">メールアドレス: <%= @user.email %></p>
+  <button class="custom-button mt-4">
+    <%= button_to t('view.user.favorite'), user_favorites_user_path, method: :get %>
+  </button>
+  <button class="custom-button mt-4">
+    <%= button_to t('view.user.follower'), show_followers_user_path, method: :get %>
+  </button>
+  <button class="custom-button mt-4">
+    <%= button_to t('view.user.followed'), show_following_user_path, method: :get %>
+  </button>
+
+  <% if @following_lyrics.any? %>
+    <div class="mt-8">
+      <% @following_lyrics.each do |lyric| %>
+        <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-4 p-4">
+          <div class="flex items-center justify-start mb-4">
+            <%= link_to user_path(lyric.user.id), class: "inline-flex items-center ml-2" do %>
+              <%= image_tag(lyric.user.user_profile.icon&.url || "default.png", class: "rounded-circle", size: "25x25") %>
+              <p class="ml-2"><%= lyric.user.user_profile.name %></p>
+            <% end %>
+            <span class="ml-2 text-xs text-gray-500"><%= lyric.created_at.strftime("%Y-%m-%d %H:%M")  %></span>
+          </div>
+          <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= lyric.phrase %></p>
+          <p class="mt-4 mr-2 ml-2 text-gray-600"><%= lyric.detail %></p>
+          <p class="mr-2 ml-2 mt-2 text-gray-600"><%= "#{lyric.song.title} / #{lyric.artist.name}" %></p>
+          <p class="mt-4 mb-4">
+            <% lyric.feelings.each do |feeling| %>
+              <span class="tag-pink px-2 py-1 rounded-full text-sm text-gray-500">
+                <%= feeling.sort %>
+              </span>
+            <% end %>
+          </p>
+          <span class="text-xs text-gray-400"><%= @favorite_count[lyric.id] || 0 %>♡</span>
+          <span><%= link_to t('view.lyric.show'), lyric_path(lyric.id) %></span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <% if @user.lyrics.any? %>
+    <div class="mt-8">
+      <% @user.lyrics.each do |lyric| %>
+        <div class="w-full max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-4 p-4">
+          <div class="flex items-center justify-start mb-4">
+            <%= link_to user_path(lyric.user.id), class: "inline-flex items-center ml-2" do %>
+              <%= image_tag(lyric.user.user_profile.icon&.url || "default.png", class: "rounded-circle", size: "25x25") %>
+              <p class="ml-2"><%= lyric.user.user_profile.name %></p>
+            <% end %>
+            <span class="ml-2 text-xs text-gray-500"><%= lyric.created_at.strftime("%Y-%m-%d %H:%M")  %></span>
+          </div>
+          <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= lyric.phrase %></p>
+          <p class="mt-4"><%= lyric.detail %></p>
+          <p><%= "#{lyric.song.title} / #{lyric.artist.name}" %></p>
+          <p class="mt-4 mb-4">
+            <% lyric.feelings.each do |feeling| %>
+              <span class="tag-pink px-2 py-1 rounded-full text-sm text-gray-500">
+                <%= feeling.sort %>
+              </span>
+            <% end %>
+          </p>
+          <span class="text-xs text-gray-400"><%= @favorite_count[lyric.id] || 0 %>♡</span>
+          <span><%= link_to t('view.lyric.show'), lyric_path(lyric.id) %></span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

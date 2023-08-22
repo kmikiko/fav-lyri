@@ -1,0 +1,6 @@
+<% notifications = @notifications.reject { |notification| notification.visitor_id == current_user.id } %>
+<% if notifications.any? %>
+  <%= render partial: 'notifications/notification', collection: notifications %>
+<% else %>
+  <p class="text-gray-500 mt-4 text-center">通知はありません</p>
+<% end %>

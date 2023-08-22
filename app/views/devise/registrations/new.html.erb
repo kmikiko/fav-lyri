@@ -1,0 +1,49 @@
+
+<h1 class="text-gray-600 mb-4"><%= t('.sign_up') %></h1>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="text-gray-600">  
+    <div class="field mb-4">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "xxxx@example.com", class: "border rounded-lg px-4 py-2" %>
+    </div>
+
+    <div class="field mb-4">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", placeholder: "６字以上の英数字を入力", class: "border rounded-lg px-4 py-2" %>
+    </div>
+
+    <div class="field mb-4">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" , placeholder: "確認用に再度入力", class: "border rounded-lg px-4 py-2"%>
+    </div>
+
+    <div>
+      <%= f.fields_for :user_profile, resource.build_user_profile || UserProfile.new do |info| %>
+        <div class="field mb-4">
+          <%= info.label :name %><br />
+          <%= info.text_field :name, autocomplete: "username", class: "border rounded-lg px-4 py-2" %><br />
+        </div>
+        <div class="field mb-4">
+          <%= info.label :introduction %><br />
+          <%= info.text_field :introduction, placeholder: "自己紹介文", class: "border rounded-lg px-4 py-2" %><br />
+        </div>
+        <%= info.label :icon %><br />
+        <%= info.file_field :icon %><br />
+        <%= info.hidden_field :image_cache %> 
+      <% end %>
+    </div>
+    <br />
+    <div class="actions">
+      <button class="custom-button" type="submit">
+        <%= f.submit t('.sign_up') %>
+      </button>
+    </div>
+  </div>   
+<% end %>
+<br>
+<%= render "devise/shared/links" %>
+

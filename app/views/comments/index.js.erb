@@ -1,0 +1,3 @@
+$("#comments_area").html("<%= j(render 'comments/index', { comments: @comment.lyric.comments, lyric: @comment.lyric }) %>");
+$("textarea").val('');
+$("#notice").html("<%= j flash[:notice] %>");

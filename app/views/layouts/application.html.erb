@@ -6,11 +6,57 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
-    <%= yield %>
-  </body>
+  <header>
+    <%= link_to image_tag("logo-fav-lyri.png", class: "rounded-circle", size: "70x70"), lyrics_path %>
+    <% if user_signed_in? %>
+      <%= link_to user_path(current_user.id) do %>
+        <% if current_user.user_profile.icon && current_user.user_profile.icon.url %>
+          <%= image_tag(current_user.user_profile.icon.url, class: "rounded-circle nav-icon", size: "35x35") %>
+        <% else %>
+          <%= image_tag("default.png", class: "rounded-circle nav-icon", size: "35x35") %>
+        <% end %>
+      <% end %>
+      <%= link_to new_lyric_path do %>
+        <%= image_tag("pen.png", class: "rounded-circle nav-icon", size: "25x25") %>
+      <% end %>
+      <%= link_to notifications_path do %>
+        <% if @unchecked_notifications.any? %>
+          <%= image_tag("bell ringing.png", class: "rounded-circle nav-icon", size: "20x20") %>
+        <% else %>
+          <%= image_tag("bell.png", class: "rounded-circle nav-icon", size: "20x20") %>
+        <% end %>
+      <% end %>
+      <%= link_to t('view.navigation.about'), root_path %>
+      <%= link_to t('view.navigation.logout'), destroy_user_session_path, method: :delete %>
+      <% if current_user.admin == true %>
+        <%= link_to t('view.navigation.admin_page'), rails_admin_path %>
+      <% end %>
+    <% else %>
+      <%= link_to t('view.navigation.about'), root_path %>
+      <%= link_to t('view.navigation.login'), new_user_session_path %>
+      <%= link_to t('view.navigation.guest_login'), users_guest_sign_in_path, method: :post %>
+      <%= link_to t('view.navigation.guest_admin_login'), users_guest_admin_sign_in_path, method: :post %>
+    <% end %>
+  </header>
+  <div class="text-center pt-20 mt-10">
+    <% if notice %>
+      <p class="notice tag-pink text-gray-500 px-4 py-3 mb-4 rounded-lg max-w-md inline-block"><%= notice %></p>
+    <% end %>
+    <br>
+    <% if alert %>
+      <p class="alert bg-red-100 text-red-600 px-4 py-3 mb-4 rounded-lg max-w-md inline-block"><%= alert %></p>
+    <% end %>
+  </div>
+  <%= yield %>
+  <footer class="footer text-xs text-gray-500 mt-10">
+    <p>Copyright &copy;2023 by Mikiko Kanda. All rights reserved.</p>
+  </footer>
+</body>
 </html>

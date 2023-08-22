@@ -1,0 +1,22 @@
+<div class="container mx-auto py-8">
+  <h2 class="text-2xl mb-4">お気に入りしてくれたユーザー</h2>
+
+  <% if @favorites.any? %>
+    <div class="grid grid-cols-1 gap-4">
+      <% @favorites.each do |favorite| %>
+        <div class="w-64 mx-auto bg-white shadow-md rounded-lg p-4">
+          <%= link_to user_path(favorite.user.id) do %>
+            <% if favorite.user.user_profile.icon && favorite.user.user_profile.icon.url %>
+              <%= image_tag(favorite.user.user_profile.icon.url, class: "rounded-full w-12 h-12 mx-auto") %>
+            <% else %>
+              <%= image_tag("default.png", class: "rounded-full w-12 h-12 mx-auto") %>
+            <% end %>
+          <span class="block text-center mt-2"><%= favorite.user.user_profile.name %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500 mt-4 text-center">まだお気に入りされていません。</p>
+  <% end %>
+</div>
