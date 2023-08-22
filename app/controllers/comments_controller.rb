@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :edit, :update, :destroy]
-  before_action :set_lyric, only: [:create, :edit, :update]
+  before_action :authenticate_user!, only: %i[create edit update destroy]
+  before_action :set_lyric, only: %i[create edit update]
   def create
     @comment = @lyric.comments.build(comment_params)
     @comment.user = current_user

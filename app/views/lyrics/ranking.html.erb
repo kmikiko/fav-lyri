@@ -1,6 +1,6 @@
 
 <div class="container mx-auto py-8">
-  <h2 class="text-2xl font-semibold mb-4">月間閲覧数ランキング</h2>
+  <h2 class="text-2xl mb-4 text-gray-600">月間閲覧数ランキング</h2>
   <div class="grid grid-cols-1 justify-center gap-4">
     <% n = 1 %>
     <% @rank_lyrics.each do |t| %>
@@ -17,9 +17,9 @@
           <% end %>
         </div>
         <p class="px-3 py-2 bg-gray-100 rounded-full text-base text-gray-600"><%= "#{t.phrase}" %></p>
-        <p class="ml-2 mr-2 mt-4"><%= "#{truncate(t.detail, length: 10)}" %></p>
-        <p class="ml-2 mr-2 mt-2"><%= "#{t.song.title}  /  #{t.artist.name}" %></p>
-        <p class="mt-4">
+        <p class="ml-2 mr-2 mt-4 text-gray-600"><%= "#{truncate(t.detail, length: 10)}" %></p>
+        <p class="ml-2 mr-2 mt-2 text-gray-600"><%= "#{t.song.title}  /  #{t.artist.name}" %></p>
+        <p class="mt-4 text-gray-600">
           <%= "#{t.impressions_count} Views" %>
           <%= link_to "Comments(#{@lyric_comments_count[t.id] || 0})", lyric_path(t.id) %>
         </p>

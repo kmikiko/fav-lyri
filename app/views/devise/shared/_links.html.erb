@@ -1,7 +1,7 @@
 <div class="actions">
   <%- if controller_name != 'sessions' %>
     <button class="custom-button" type="submit">
-        <%= button_to t(".sign_in"), new_session_path(resource_name) %>
+        <%= button_to t(".sign_in"), new_session_path(resource_name), method: :get %>
     </button>
   <% end %>
 </div>
@@ -11,13 +11,10 @@
     <%= button_to t(".sign_up"), new_registration_path(resource_name), method: :get %>
   </button>
 <% end %>
-<br>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to t('.didn_t_receive_confirmation_instructions'), new_confirmation_path(resource_name) %><br />
 <% end %>
-<br>
-
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>

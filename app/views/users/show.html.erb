@@ -1,11 +1,9 @@
 <p class="text-gray-600">User Page</p>
-
 <% if current_user == @user %>
   <% if current_user.email != 'guest@example.com' && current_user.email != 'guest-admin@example.com' %>
     <%= link_to t('view.lyric.edit'), edit_user_registration_path %>
   <% end %>
 <% end %>
-
 <div class="mt-4 flex justify-center">
   <% if @user.user_profile.icon && @user.user_profile.icon.url %>
     <%= image_tag(@user.user_profile.icon.url, class: "rounded-circle", size: "50x50") %>
@@ -13,14 +11,11 @@
     <%= image_tag("default.png", class: "rounded-circle", size: "50x50") %>
   <% end %>
 </div>
-
 <p class="mt-4 text-gray-600"><%= @user.user_profile.name %></p>
 <p class="mt-4 ml-2 mr-2 text-gray-600"><%= @user.user_profile.introduction %></p>
-
 <% if user_signed_in? && current_user != @user %>
   <%= render 'follow_form', user: @user %>
 <% end %>
-
 <% if current_user == @user %>
   <p class="mt-4 text-gray-600">メールアドレス: <%= @user.email %></p>
   <button class="custom-button mt-4">
@@ -32,7 +27,6 @@
   <button class="custom-button mt-4">
     <%= button_to t('view.user.followed'), show_following_user_path, method: :get %>
   </button>
-
   <% if @following_lyrics.any? %>
     <div class="mt-8">
       <% @following_lyrics.each do |lyric| %>

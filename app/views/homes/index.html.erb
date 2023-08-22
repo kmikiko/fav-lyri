@@ -1,11 +1,9 @@
 <div class="homes_introduction py-8 px-4 sm:px-6 lg:px-8 text-gray-600">
   <h1 class="text-4xl mb-4 text-center">fav-lyri（ファブリリ）</h1>
-  <div class="flex justify-center items-center">
+  <div class="flex justify-center items-center mb-4">
     <%= image_tag("logo-fav-lyri.png", size: "200x200") %>
   </div>
-  <br>
-  <h2 class="text-xl mb-8 text-center">Favorite Lyrics – 歌詞の共感、ここから広がる。</h2>
-
+  <h2 class="text-xl pb-16 text-center">Favorite Lyrics – 歌詞の味わい、ここから広がる。</h2>
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h3 class="text-xl mb-4">fav-lyriで発信！</h3>
     <p class="text-sm leading-tight text-gray-500 mb-4">
@@ -21,7 +19,6 @@
       気軽に投稿してみましょう。<br>
     </p>
   </div>
-
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h3 class="text-xl mb-4">fav-lyriで発見！</h3>
     <p class="text-sm leading-tight text-gray-500 mb-4">
@@ -36,8 +33,7 @@
       フォローするのもおすすめです。
     </p>
   </div>
-  <br>
-  <h3 class="text-xl mb-4 text-center">fav-lyriでできること</h3>
+  <h3 class="text-xl pt-8 mb-4 text-center">fav-lyriでできること</h3>
   <h4 class="text-lg mb-1">他のユーザーの投稿を見て楽しむ！</h4>
   <br>
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
@@ -47,51 +43,43 @@
       【 歌詞の一部 / 曲名 / アーティスト名 / 今の気分 】
     </p>
   </div>
-
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h5 class="text-base mb-2">閲覧数ランキング機能</h5>
     <p class="text-sm leading-tight text-gray-500 mb-4">
       直近１か月で人気の投稿をランキングページで紹介します。
     </p>
   </div>
-
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h5 class="text-base mb-2">楽曲再生機能</h5>
     <p class="text-sm leading-tight text-gray-500 mb-4">
       投稿詳細ページで、曲のプレビュー再生が可能です。
     </p>
   </div>
-
-  <h4 class="text-lg mb-1 text-center">ログインするとさらに楽しい！</h4>
-
+  <h4 class="text-lg mb-4 text-center">ログインするとさらに楽しい！</h4>
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h5 class="text-base mb-2">投稿機能</h5>
     <p class="text-sm leading-tight text-gray-500 mb-4">
       お気に入りの歌詞についての投稿・編集・削除が可能です。
     </p>
   </div>
-
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h5 class="text-base mb-2">コメント機能</h5>
     <p class="text-sm leading-tight text-gray-500 mb-4">
       気になる投稿にコメントが可能です。
     </p>
   </div>
-
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h5 class="text-base mb-2">お気に入り機能</h5>
     <p class="text-sm leading-tight text-gray-500 mb-4">
       気になる投稿を『お気に入り』して見返すことが可能です。
     </p>
   </div>
-
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h5 class="text-base mb-2">フォロー機能</h5>
     <p class="text-sm leading-tight text-gray-500 mb-4">
       気になるユーザーをフォローすることが可能です。
     </p>
   </div>
-
   <div class="max-w-lg mx-auto bg-white shadow-lg rounded-lg overflow-hidden mb-8 p-6">
     <h5 class="text-base mb-2">通知機能</h5>
     <p class="text-sm leading-tight text-gray-5 00 mb-4">
@@ -99,7 +87,6 @@
       されると通知画面でお知らせします。
     </p>  
   </div>
-
   <h2 class="text-2xl mt-8 text-center">Why don't you enjoy fav-lyri?</h2>
 </div>
 <% unless user_signed_in? %>
@@ -107,11 +94,9 @@
     <button class="custom-button">
       <%= button_to t('view.navigation.login'), new_user_session_path, method: :get, class: "px-8 py-3 text-white font-semibold shadow-md" %>
     </button>
-
     <button class="custom-button">
       <%= button_to t('view.navigation.guest_login'), users_guest_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md" %>
     </button>
-
     <button class="custom-button">
       <%= button_to t('view.navigation.guest_admin_login'), users_guest_admin_sign_in_path, method: :post, class: "px-8 py-3 text-white font-semibold shadow-md " %>
     </button>
