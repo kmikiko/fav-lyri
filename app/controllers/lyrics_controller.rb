@@ -2,8 +2,8 @@ class LyricsController < ApplicationController
   require 'rspotify'
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_ID'])
 
-  before_action :authenticate_user!, only: %i[ new create]
-  before_action :set_lyric, only: %i[ show edit update destroy explain]
+  before_action :authenticate_user!, only: %i[new create]
+  before_action :set_lyric, only: %i[show edit update destroy]
   
   def index
     @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
