@@ -3,7 +3,7 @@ class LyricsController < ApplicationController
   RSpotify.authenticate(ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_SECRET_ID'])
 
   before_action :authenticate_user!, only: %i[new create]
-  before_action :set_lyric, only: %i[show edit update destroy]
+  before_action :set_lyric, only: %i[show edit update destroy explain]
   
   def index
     @q = Lyric.ransack(params[:q].try(:to_unsafe_h))
@@ -77,35 +77,35 @@ class LyricsController < ApplicationController
     end
   end
 
-  # require "openai"
+  require "openai"
 
-  # def explain
-  #   @phrase = @lyric.phrase
-  #   @song = @lyric.song.title
-  #   @artist = @lyric.artist.name
+  def explain
+    @phrase = @lyric.phrase
+    @song = @lyric.song.title
+    @artist = @lyric.artist.name
 
-  #   client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
-  #   response = client.chat(
-  #       parameters: {
-  #         model: "gpt-3.5-turbo-0613",
-  #         messages: [
-  #           { role: "system", content: "曲名と歌手名とその曲に含まれる歌詞を伝えるので、その歌詞に込められた意図を推察して教えてください。" },
-  #           { role: "system", content: "100字以内で回答してください。"},
-  #           { role: "system", content: "回答には、「他に何か別の質問やトピックについてお知りになりたいことがあれば、どうぞお知らせください。」のような、次の質問を促すような文言は含めないでください。" },
-  #           { role: "system", content: "「データベースには含まれておりません」という回答は不要です。" },
-  #           { role: "system", content: "「この歌詞の解釈は、個人によって異なるかもしれません」という回答は不要です。" },
-  #           { role: "system", content: "「ただし、これは一つの解釈であり、個人によって解釈が異なる可能性もあります」という回答は不要です。" },
-  #           { role: "system", content: "「具体的な解釈は聴く人によって異なる可能性があるので、個々の解釈は多様であることに留意してください」という回答は不要です。"},
-  #           { role: "system", content: "「具体的な意図は個人の解釈によって異なるかもしれません」という旨の回答は不要です。"},
-  #           { role: "user", content: "#{@artist}の#{@song}という曲について、#{@phrase}という歌詞があります。その歌詞に込められた意図を推察して教えてください。" },
-  #           { role: "user", content: "もし、「#{@artist}」の「#{@song}」や「#{@phrase}」といった楽曲や歌詞についての情報があなたのデータベースには含まれていない場合は、『歌詞についての説明が作成できませんでした』とだけ答え、その他に余計な文章を答えないでください。" },
-  #           { role: "user", content: "回答は、「この歌詞は」で始めてください。" },
-  #         ],
-  #       },
-  #     )
+    client = OpenAI::Client.new(access_token: ENV["OPENAI_API_KEY"])
+    response = client.chat(
+        parameters: {
+          model: "gpt-3.5-turbo-0613",
+          messages: [
+            { role: "system", content: "曲名と歌手名とその曲に含まれる歌詞を伝えるので、その歌詞に込められた意図を推察して教えてください。" },
+            { role: "system", content: "100字以内で回答してください。"},
+            { role: "system", content: "回答には、「他に何か別の質問やトピックについてお知りになりたいことがあれば、どうぞお知らせください。」のような、次の質問を促すような文言は含めないでください。" },
+            { role: "system", content: "「データベースには含まれておりません」という回答は不要です。" },
+            { role: "system", content: "「この歌詞の解釈は、個人によって異なるかもしれません」という回答は不要です。" },
+            { role: "system", content: "「ただし、これは一つの解釈であり、個人によって解釈が異なる可能性もあります」という回答は不要です。" },
+            { role: "system", content: "「具体的な解釈は聴く人によって異なる可能性があるので、個々の解釈は多様であることに留意してください」という回答は不要です。"},
+            { role: "system", content: "「具体的な意図は個人の解釈によって異なるかもしれません」という旨の回答は不要です。"},
+            { role: "user", content: "#{@artist}の#{@song}という曲について、#{@phrase}という歌詞があります。その歌詞に込められた意図を推察して教えてください。" },
+            { role: "user", content: "もし、「#{@artist}」の「#{@song}」や「#{@phrase}」といった楽曲や歌詞についての情報があなたのデータベースには含まれていない場合は、『歌詞についての説明が作成できませんでした』とだけ答え、その他に余計な文章を答えないでください。" },
+            { role: "user", content: "回答は、「この歌詞は」で始めてください。" },
+          ],
+        },
+      )
 
-  #   @explain = response.dig("choices", 0, "message", "content")
-  # end
+    @explain = response.dig("choices", 0, "message", "content")
+  end
 
   private
 

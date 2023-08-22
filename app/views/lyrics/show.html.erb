@@ -34,8 +34,9 @@
       <p></p>
     <% end %>
   </div>
-    <%# <p class="mt-4 mb-4"><%= link_to 'AI歌詞解説', explain_lyric_path(@lyric) %>    
-  
+    <button class= "opacity-60 shadow bg-red-100 hover:bg-red-200 text-white py-1 px-2 rounded-lg mt-4 mb-4 text-xs">
+      <%= link_to 'AI歌詞解説', explain_lyric_path(@lyric) %>
+    </button>
   <% if user_signed_in? %>
     <% unless @lyric.user_id == current_user.id %>
       <% if @favorite.present? %>
