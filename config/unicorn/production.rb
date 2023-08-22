@@ -1,5 +1,5 @@
 $worker  = 2
-$timeout = 30
+$timeout = 60
 
 $app_dir = "/var/www/fav-lyri/current"
 $listen  = File.expand_path 'tmp/sockets/unicorn.sock', $app_dir

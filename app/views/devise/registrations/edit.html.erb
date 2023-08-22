@@ -46,19 +46,16 @@
         <%= info.hidden_field :image_cache %>
       <% end %>
     </div>
-    <br />
-    <div class="actions">
+    <div class="actions mt-4">
       <button class="custom-button" type="submit">
         <%= f.submit t('.update') %>
       </button>
     </div>
   <% end %>
 </div>
-<br />
-<div>
+<div class="mt-4 mb-4">
   <button class="custom-button">
     <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure'), turbo_confirm: t('.are_you_sure') }, method: :delete %>
   </button>
 </div>
-<br />
 <%= link_to t('devise.shared.links.back'), :back %>

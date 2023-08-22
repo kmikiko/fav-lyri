@@ -11,7 +11,6 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
   </head>
-
   <body>
   <header>
     <%= link_to image_tag("logo-fav-lyri.png", class: "rounded-circle", size: "70x70"), lyrics_path %>
@@ -55,8 +54,8 @@
     <% end %>
   </div>
   <%= yield %>
-  <footer class="footer text-xs text-gray-500 mt-10">
-    <p>Copyright &copy;2023 by Mikiko Kanda. All rights reserved.</p>
+  <footer class="footer mt-10">
+    <span class="block text-xs text-gray-500 sm:text-center dark:text-gray-400">Copyright &copy;2023 by Mikiko Kanda. All rights reserved.</span>
   </footer>
 </body>
 </html>

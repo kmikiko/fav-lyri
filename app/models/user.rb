@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :omniauthable
   devise :database_authenticatable, :registerable, :timeoutable, :lockable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -19,7 +17,6 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: true,
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, length: { minimum: 6 }
-
 
   def follow!(other_user)
     active_relationships.create!(followed_id: other_user.id)
@@ -54,7 +51,7 @@ class User < ApplicationRecord
   def self.guest_admin
     find_or_create_by!(email: 'guest-admin@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.build_user_profile(name: "ゲスト")
+      user.build_user_profile(name: "ゲスト(管理者)")
       user.admin = true
     end
   end

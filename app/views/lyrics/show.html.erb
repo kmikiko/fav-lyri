@@ -62,9 +62,8 @@
 </div>  
     <%= render partial: 'comments/form', locals: { comment: @comment, lyric: @lyric } %>
   <% else %>
-    <%= link_to t('view.lyric.login_required'), new_user_session_path %>
+    <p><%= link_to t('view.lyric.login_required'), new_user_session_path %></p>
   <% end %>
-
   <div id="comments_area">
     <%= render partial: 'comments/index', locals: { comments: @comments, lyric: @lyric } %>
   </div>

@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [user_profile_attributes: [:id, :name, :icon, :image_cache, :introduction]])
-    devise_parameter_sanitizer.permit(:account_update, keys: [user_profile_attributes: [:id, :name, :icon, :image_cache, :introduction]])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [user_profile_attributes: %i[id name icon image_cache introduction]])
+    devise_parameter_sanitizer.permit(:account_update, keys: [user_profile_attributes: %i[id name icon image_cache introduction]])
   end
 
   private

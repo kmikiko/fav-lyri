@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:show_favorites, :show_followers, :show_following]
+  before_action :authenticate_user!, only: %i[show_favorites show_followers show_following]
   def show
     @user = User.find(params[:id]) 
     following_users = @user.following + [@user]

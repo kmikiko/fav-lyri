@@ -1,9 +1,8 @@
 <div class="grid grid-cols-1 gap-4">
   <% visitor = notification.visitor %>
   <% visited = notification.visited %>
-
   <div class="col-md-6 mx-auto">
-    <div class="bg-white shadow-md rounded-lg p-4 max-w-lg">
+    <div class="bg-white shadow-md rounded-lg p-4 max-w-lg mb-8">
       <div class="flex items-center mb-2">
         <div class="mr-2">
           <%= link_to user_path(visitor) do %>
@@ -18,7 +17,6 @@
           <strong id="test_name"><%= visitor.user_profile.name %></strong> さんが
         </div>
       </div>
-
       <% case notification.action %>
       <% when 'follow' then %>
         <div class="mt-2" id="follow_test">
@@ -50,11 +48,9 @@
           </p>
         </div>
       <% end %>
-
       <div class="text-sm text-gray-500 mt-2">
         <%= notification.created_at.strftime("%Y-%m-%d %H:%M") %>
       </div>
     </div>
-    <br>
   </div>
 </div>
